@@ -1,0 +1,69 @@
+/* ========== NAVBAR ========== */
+
+.navbarContainer {
+  width: 100%;
+  padding: 2rem 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-primary);
+  background: var(--base);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 45%;
+}
+
+.navbarContainer img {
+  width: 18rem;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  font-size: 2rem;
+}
+
+.activeLink {
+  color: var(--color-primary);
+  padding: 1.5rem 0.8rem;
+  border-bottom: 2px solid var(--color-primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.inactiveLink {
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.inactiveLink:hover {
+  transform: translateY(-6px);
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightSide span {
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+}
+
+li {
+  list-style: none;
+}

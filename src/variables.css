@@ -1,0 +1,40 @@
+:root {
+  /* ========== Brand Colors ========== */
+  --color-primary: #e50914; /* Brand */
+  --color-primary-hover: #b20710;
+  --color-primary-rgb: 229, 9, 20; /* For rgba transparency */
+
+  --color-accent: #00ffe1;
+  --color-accent-muted: rgba(0, 255, 255, 0.1);
+  --color-accent-rgb: 0, 255, 255;
+
+  /* ===== Surface & Background ===== */
+  /* --- To create depth in the UI --- */
+  --base: #08080b;
+  --surface-low: #121217;
+  --surface-medium: #1c1c23;
+  --surface-high: #25252e;
+
+  /* ===== Borders & Dividers ===== */
+  --border-subtle: #2a2a32;
+  --border-strong: #3f3f46;
+
+  /* ===== Borders radius ===== */
+  --br-sm: 1rem;
+  --br-md: 1.8rem;
+  --br-lg: 2.5rem;
+
+  /* ========== Typography ========== */
+  --text-primary: #f5f5f7; /* Headings & Titles */
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-on-brand: #fff;
+
+  /* ========== Status ========== */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+
+  /* ========== Effects ========== */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}

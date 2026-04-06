@@ -12,8 +12,11 @@ import {
 import Navbar from "../../components/Navbar";
 import MovieCard_2 from "../../components/MovieCard_2";
 import useWatchlist from "../../hooks/useWatchlist";
+import { useNavigate } from "react-router-dom";
 
 const Explore = () => {
+  let navigate = useNavigate();
+
   const [searchInput, setSearchInput] = useState("");
 
   const { addToWatchlist } = useWatchlist();
@@ -99,7 +102,9 @@ const Explore = () => {
           </p>
         </div>
 
-        <button>See Trending Movies</button>
+        <button onClick={() => navigate("/Trending")}>
+          See Trending Movies
+        </button>
       </section>
 
       {/* =============== CATEGORY SECTION =============== */}

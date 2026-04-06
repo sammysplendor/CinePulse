@@ -5,7 +5,7 @@
   padding: 2rem 7rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 40rem;
   color: var(--text-primary);
   background: var(--base);
 
@@ -13,13 +13,6 @@
   top: 0;
   left: 0;
   z-index: 30;
-}
-
-.leftSide {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 45%;
 }
 
 .navbarContainer img {
@@ -30,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 8rem;
   font-size: 2rem;
 }
 
@@ -51,17 +44,6 @@
 
 .inactiveLink:hover {
   transform: translateY(-6px);
-}
-
-.rightSide {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.rightSide span {
-  font-size: 1.8rem;
-  color: var(--text-secondary);
 }
 
 li {

@@ -59,3 +59,9 @@ select {
 option {
   background: var(--base);
 }
+
+label {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 300;
+}

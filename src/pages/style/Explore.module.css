@@ -60,6 +60,7 @@
   background: var(--color-primary);
   color: var(--text-on-brand);
   border-radius: var(--br-lg);
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 

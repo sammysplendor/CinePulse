@@ -5,7 +5,7 @@
   padding: 2rem 7rem;
   display: flex;
   align-items: center;
-  gap: 40rem;
+  justify-content: space-between;
   color: var(--text-primary);
   background: var(--base);
 
@@ -17,6 +17,18 @@
 
 .navbarContainer img {
   width: 18rem;
+}
+
+.menu {
+  display: block;
+}
+
+.menuIcon {
+  color: var(--text-primary);
+}
+
+.menuBtn {
+  cursor: pointer;
 }
 
 .navLinks {
@@ -46,6 +58,92 @@
   transform: translateY(-6px);
 }
 
+.openWatchlistBtn {
+  display: none;
+}
+
 li {
   list-style: none;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--base);
+  padding: 2.5rem;
+  border-radius: 0.8rem;
+  height: 50vh;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.mobileMenu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =============== RESPONSIVENESS =============== */
+
+/* ===== ≤ 1024px (Tablets) ===== */
+@media (max-width: 64rem) {
+  /* 1024px / 16px = 64rem */
+
+  .navbarContainer {
+    justify-content: space-between;
+  }
+}
+
+/* ===== ≤ 768px (Small Tablets/Large Phones) ===== */
+@media (max-width: 48rem) {
+  /* 768px / 16px = 48rem */
+
+  .navbarContainer {
+    z-index: 40;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+  }
+
+  .navItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .openWatchlistBtn {
+    display: block;
+    color: var(--text-secondary);
+    background: var(--surface-low);
+    padding: 1rem 2rem;
+    border-radius: var(--br-sm);
+    text-align: left;
+    margin-top: 10rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .openWatchlistBtn:hover {
+    background: var(--surface-medium);
+    color: var(--text-primary);
+  }
+}
+
+/* ===== ≤ 576px (Phones) ===== */
+@media (max-width: 36rem) {
+  /* 576px / 16px = 36rem */
 }

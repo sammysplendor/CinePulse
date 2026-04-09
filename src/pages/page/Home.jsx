@@ -34,6 +34,8 @@ const Home = () => {
 
   const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
 
+  const [openWatchlist, setOpenWatchlist] = useState(false);
+
   return (
     <div className={styles.pageContainer}>
       <Navbar />
@@ -98,9 +100,16 @@ const Home = () => {
         </section>
       </main>
 
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar}${openWatchlist ? styles.open : ""}`}>
         <section className={styles.watchlistContainer}>
           <h3>My Pulse Watchlist</h3>
+
+          <button
+            className={styles.closeWatchlist}
+            onClick={() => setOpenWatchlist(false)}
+          >
+            Close
+          </button>
 
           <div className={styles.watchlist}>
             {watchlist?.map((movie) => (

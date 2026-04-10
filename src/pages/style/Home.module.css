@@ -119,6 +119,10 @@ main {
 @media (max-width: 48rem) {
   /* 768px / 16px = 48rem */
 
+  .pageContainer {
+    padding-inline: 3rem;
+  }
+
   main {
     width: 100%;
   }
@@ -143,4 +147,8 @@ main {
 /* ===== ≤ 576px (Phones) ===== */
 @media (max-width: 36rem) {
   /* 576px / 16px = 36rem */
+
+  .pageContainer {
+    padding-inline: 2.5rem;
+  }
 }

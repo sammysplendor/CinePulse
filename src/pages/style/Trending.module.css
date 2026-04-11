@@ -102,3 +102,35 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
 }
+
+/* =============== RESPONSIVENESS =============== */
+
+/* ===== ≤ 768px (Small Tablets/Large Phones) ===== */
+@media (max-width: 48rem) {
+  /* 768px / 16px = 48rem */
+
+  .pageContainer {
+    padding-inline: 3rem;
+  }
+
+  .moviecardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== ≤ 576px (Phones) ===== */
+@media (max-width: 36rem) {
+  /* 576px / 16px = 36rem */
+
+  .pageContainer {
+    padding-inline: 2.5rem;
+  }
+
+  .gridContainer {
+    width: 100%;
+  }
+
+  .moviecardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

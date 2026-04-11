@@ -20,7 +20,7 @@
 }
 
 .menu {
-  display: block;
+  display: none;
 }
 
 .menuIcon {
@@ -28,6 +28,7 @@
 }
 
 .menuBtn {
+  display: none;
   cursor: pointer;
 }
 
@@ -72,23 +73,20 @@ li {
   right: 0;
   background: var(--base);
   padding: 2.5rem;
-  border-radius: 0.8rem;
-  height: 50vh;
+  height: 100vh;
   width: 50%;
 
   display: flex;
   flex-direction: column;
   gap: 5rem;
 
-  transform: translateY(-10px);
-  opacity: 0;
+  transform: translateY(-1500px);
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.6s ease;
 }
 
 .mobileMenu.open {
   transform: translateY(0);
-  opacity: 1;
   pointer-events: auto;
 }
 
@@ -101,6 +99,10 @@ li {
   .navbarContainer {
     justify-content: space-between;
     padding-inline: 5rem;
+  }
+
+  .menuBtn {
+    display: block;
   }
 }
 

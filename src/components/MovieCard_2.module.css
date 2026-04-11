@@ -5,11 +5,10 @@
   background: var(--surface-low);
   padding: 2rem 1rem;
   border-radius: var(--br-sm);
-  width: fit-content;
 }
 
 .cardContainer .poster {
-  width: 20rem;
+  width: 100%;
   height: 30rem;
   border-radius: var(--br-sm);
 }

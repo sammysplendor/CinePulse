@@ -23,7 +23,7 @@ const NavItems = ({ onClick, onOpenWatchlist }) => (
       className={styles.openWatchlistBtn}
       onClick={() => {
         onClick?.();
-        onOpenWatchlist();
+        onOpenWatchlist?.();
       }}
     >
       See Watchlist
@@ -43,7 +43,7 @@ const Navbar = ({ onOpenWatchlist }) => {
 
       {/* --- Desktop --- */}
       <div className={styles.navLinks}>
-        <NavItems />
+        <NavItems onOpenWatchlist={onOpenWatchlist} />
       </div>
 
       {/* --- Mobile --- */}
@@ -58,10 +58,7 @@ const Navbar = ({ onOpenWatchlist }) => {
         </button>
 
         <div className={`${styles.mobileMenu} ${openMenu ? styles.open : ""}`}>
-          <NavItems
-            onClick={() => setOpenMenu(false)}
-            onOpenWatchlist={onOpenWatchlist}
-          />
+          <NavItems onOpenWatchlist={onOpenWatchlist} />
         </div>
       </div>
     </nav>

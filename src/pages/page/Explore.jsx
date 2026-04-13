@@ -17,8 +17,6 @@ import { useNavigate } from "react-router-dom";
 const Explore = () => {
   let navigate = useNavigate();
 
-  const [searchInput, setSearchInput] = useState("");
-
   const { addToWatchlist } = useWatchlist();
 
   const [genres, setGenres] = useState([]);
@@ -75,6 +73,48 @@ const Explore = () => {
       setTopRatedSeries(topRatedTVSeries);
     }
   };
+
+  // ===== Search system logic ===== //
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [movieGenre, setMovieGenre] = useState([]);
+
+  useEffect(() => {
+    const fetchAnyMovies = async () => {
+      const fetchedPopularMovies = await getPopularMovies();
+      const fetchedGenre = await getGenres();
+      const fetchedTVGenre = await getTVGenres();
+      setSearchResult(fetchedPopularMovies);
+
+      const combinedFetchedGenres = [...fetchedGenre, ...fetchedTVGenre];
+      const uniqueGenres = [
+        ...new Map(combinedFetchedGenres.map((g) => [g.id, g])).values(),
+      ];
+      setMovieGenre(uniqueGenres);
+    };
+
+    fetchAnyMovies();
+  }, []);
+
+  const searchTerm = searchInput.trim().toLowerCase();
+
+  const matchedGenres = movieGenre.filter((genre) =>
+    genre?.name?.toLowerCase().includes(searchTerm),
+  );
+
+  const matchedGenreIds = matchedGenres.map((g) => g.id);
+
+  const filteredMovies = searchTerm
+    ? searchResult.filter((movie) => {
+        const matchesTitle = movie?.title?.toLowerCase().includes(searchTerm);
+
+        const matchesGenre = movie?.genre_ids?.some((id) =>
+          matchedGenreIds.includes(id),
+        );
+
+        return matchesTitle || matchesGenre;
+      })
+    : [];
 
   return (
     <div className={styles.pageContainer}>
@@ -176,6 +216,16 @@ const Explore = () => {
             onAddToWatchlist={addToWatchlist}
           />
         ))}
+
+        {searchTerm.length > 0 &&
+          filteredMovies.map((movie) => (
+            <MovieCard_2
+              key={movie.id}
+              movie={movie}
+              genres={genres}
+              onAddToWatchlist={addToWatchlist}
+            />
+          ))}
       </section>
     </div>
   );

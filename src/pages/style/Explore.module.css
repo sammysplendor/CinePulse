@@ -35,6 +35,10 @@
   gap: 2rem;
 }
 
+.searchBar input {
+  width: 100%;
+}
+
 .searchIcon {
   color: var(--text-tertiary);
 }

@@ -1,12 +1,13 @@
 import styles from "../style/Home.module.css";
 import { useEffect, useState } from "react";
 import { getTopTrending, getTopRated } from "../../services/movieapi";
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
 import WatchlistCard from "../../components/WatchlistCard";
 import Navbar from "../../components/Navbar";
+import useWatchTrailer from "../../hooks/useWatchTrailer";
 
 const Home = () => {
   const [topTrending, setTopTrending] = useState([]);
@@ -36,6 +37,8 @@ const Home = () => {
 
   const [openWatchlist, setOpenWatchlist] = useState(false);
 
+  const { trailerURL, setTrailerURL, handleWatchTrailer } = useWatchTrailer();
+
   return (
     <div className={styles.pageContainer}>
       <Navbar onOpenWatchlist={() => setOpenWatchlist(true)} />
@@ -63,10 +66,38 @@ const Home = () => {
               </div>
             )}
 
-            <button className={styles.trailerBtn}>
+            <button
+              className={styles.trailerBtn}
+              onClick={() => handleWatchTrailer(featuredMovie)}
+            >
               <Play fill="#fff" className={styles.playIcon} /> Watch Trailer
             </button>
           </div>
+
+          {trailerURL && (
+            <div
+              className={styles.trailerModal}
+              onClick={() => setTrailerURL("")}
+            >
+              <div
+                className={styles.videoWrapper}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <X
+                  className={styles.closeBtn}
+                  onClick={() => setTrailerURL("")}
+                />
+                <iframe
+                  width="100%"
+                  height="450"
+                  src={trailerURL}
+                  title="Trailer"
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          )}
 
           <div className={styles.rightContent}></div>
         </section>

@@ -65,7 +65,7 @@ const Trending = ({ handleWatchTrailer }) => {
               <ChevronRight />
             </button>
 
-            {/* ----- SLIDE TRACK ----- */}
+            {/* ----- SLIDER TRACK ----- */}
             <div
               className={styles.sliderTrack}
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}

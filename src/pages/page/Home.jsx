@@ -1,7 +1,7 @@
 import styles from "../style/Home.module.css";
 import { useEffect, useState } from "react";
 import { getTopTrending, getTopRated } from "../../services/movieapi";
-import { Play, X } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
@@ -11,7 +11,7 @@ import Navbar from "../../components/Navbar";
 const Home = ({ handleWatchTrailer }) => {
   const [topTrending, setTopTrending] = useState([]);
   const [topRated, setTopRated] = useState([]);
-  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -25,12 +25,20 @@ const Home = ({ handleWatchTrailer }) => {
       // Pick a random movie for the spotlight
       if (trendingMovies?.length > 0) {
         const randomIndex = Math.floor(Math.random() * trendingMovies.length);
-        setFeaturedMovie(trendingMovies[randomIndex]);
+        setCurrentIndex(randomIndex);
       }
     };
 
     fetchMovie();
   }, []);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? topTrending.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === topTrending.length - 1 ? 0 : prev + 1));
+  };
 
   const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
 
@@ -44,8 +52,8 @@ const Home = ({ handleWatchTrailer }) => {
         <section
           className={styles.heroSection}
           style={{
-            backgroundImage: featuredMovie
-              ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.poster_lg}${featuredMovie.backdrop_path})`
+            backgroundImage: topTrending[currentIndex]
+              ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${topTrending[currentIndex].backdrop_path})`
               : "/no-image.png",
 
             backgroundSize: "cover",
@@ -56,47 +64,39 @@ const Home = ({ handleWatchTrailer }) => {
           <div className={styles.leftContent}>
             <h3>Top Trending Spotlight</h3>
 
-            {featuredMovie && (
-              <div className={styles.movieDetail}>
-                <h1>{featuredMovie.title}</h1>
-                <p>{featuredMovie.overview}</p>
-              </div>
-            )}
+            <div className={styles.slider}>
+              <button className={styles.sliderBtnLeft} onClick={handlePrev}>
+                <ChevronLeft />
+              </button>
 
-            <button
-              className={styles.trailerBtn}
-              onClick={() => handleWatchTrailer(featuredMovie)}
-            >
-              <Play fill="#fff" className={styles.playIcon} /> Watch Trailer
-            </button>
-          </div>
+              <button className={styles.sliderBtnRight} onClick={handleNext}>
+                <ChevronRight />
+              </button>
 
-          {/* {trailerURL && (
-            <div
-              className={styles.trailerModal}
-              onClick={() => setTrailerURL("")}
-            >
+              {/* ----- SLIDER TRACK ----- */}
               <div
-                className={styles.videoWrapper}
-                onClick={(e) => e.stopPropagation()}
+                className={styles.sliderTrack}
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
-                <X
-                  className={styles.closeBtn}
-                  onClick={() => setTrailerURL("")}
-                />
-                <iframe
-                  width="100%"
-                  height="450"
-                  src={trailerURL}
-                  title="Trailer"
-                  frameBorder="0"
-                  allowFullScreen
-                />
+                {topTrending.map((movie) => (
+                  <div className={styles.slide} key={movie.id}>
+                    <div className={styles.movieDetail}>
+                      <h1>{movie.title}</h1>
+                      <p>{movie.overview}</p>
+
+                      <button
+                        className={styles.trailerBtn}
+                        onClick={() => handleWatchTrailer(movie)}
+                      >
+                        <Play fill="#fff" className={styles.playIcon} /> Watch
+                        Trailer
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          )} */}
-
-          <div className={styles.rightContent}></div>
+          </div>
         </section>
 
         <section className={styles.trendingSection}>

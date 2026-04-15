@@ -2,9 +2,7 @@ import styles from "./WatchlistCard.module.css";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../constants/config";
 import { Trash2, Play } from "lucide-react";
 
-const WatchlistCard = ({ movie, onRemove }) => {
-  // if (!movie.poster_path) return null;
-
+const WatchlistCard = ({ movie, onRemove, handleWatchTrailer }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -39,7 +37,10 @@ const WatchlistCard = ({ movie, onRemove }) => {
             ? "Released"
             : "Coming soon"}
         </span>
-        <button className={styles.trailerBtn}>
+        <button
+          className={styles.trailerBtn}
+          onClick={() => handleWatchTrailer(movie)}
+        >
           <Play fill="#fff" className={styles.playIcon} /> Trailer
         </button>
         <span onClick={() => onRemove(movie.id)} title="Remove from watchlist">

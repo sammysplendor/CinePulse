@@ -7,9 +7,8 @@ import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
 import WatchlistCard from "../../components/WatchlistCard";
 import Navbar from "../../components/Navbar";
-import useWatchTrailer from "../../hooks/useWatchTrailer";
 
-const Home = () => {
+const Home = ({ handleWatchTrailer }) => {
   const [topTrending, setTopTrending] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -36,8 +35,6 @@ const Home = () => {
   const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
 
   const [openWatchlist, setOpenWatchlist] = useState(false);
-
-  const { trailerURL, setTrailerURL, handleWatchTrailer } = useWatchTrailer();
 
   return (
     <div className={styles.pageContainer}>
@@ -74,7 +71,7 @@ const Home = () => {
             </button>
           </div>
 
-          {trailerURL && (
+          {/* {trailerURL && (
             <div
               className={styles.trailerModal}
               onClick={() => setTrailerURL("")}
@@ -97,7 +94,7 @@ const Home = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           <div className={styles.rightContent}></div>
         </section>
@@ -153,13 +150,10 @@ const Home = () => {
                 key={movie.id}
                 movie={movie}
                 onRemove={removeFromWatchlist}
+                handleWatchTrailer={handleWatchTrailer}
               />
             ))}
           </div>
-        </section>
-
-        <section className={styles.liveFeed}>
-          <h3>CinePulse Live Feed</h3>
         </section>
       </aside>
     </div>

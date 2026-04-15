@@ -6,10 +6,15 @@ const useWatchTrailer = () => {
 
   const handleWatchTrailer = async (movie) => {
     const trailerKey = await getMovieTrailer(movie.id);
+
+    if (!trailerKey) {
+      alert("Trailer not available");
+      return;
+    }
+
     const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
 
-    trailerKey ? setTrailerURL(trailerUrl) : alert("Trailer not available");
-    console.log("Trailer key:", trailerKey);
+    setTrailerURL(trailerUrl);
   };
 
   return { trailerURL, setTrailerURL, handleWatchTrailer };

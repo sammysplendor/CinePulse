@@ -2,14 +2,14 @@ import styles from "../style/Trending.module.css";
 import Navbar from "../../components/Navbar";
 import { getTopTrending } from "../../services/movieapi";
 import { useState, useEffect } from "react";
-import { Play, ArrowRight } from "lucide-react";
+import { Play, ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
 
 const Trending = ({ handleWatchTrailer }) => {
   const [weekTrending, setWeekTrending] = useState([]);
-  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const { addToWatchlist } = useWatchlist();
 
@@ -19,17 +19,29 @@ const Trending = ({ handleWatchTrailer }) => {
 
       setWeekTrending(weekTrendingMovie);
 
-      //  Pick a random movie to display
+      //  Start from random movie
       if (weekTrendingMovie?.length > 0) {
         const randomIndex = Math.floor(
           Math.random() * weekTrendingMovie.length,
         );
-        setFeaturedMovie(weekTrendingMovie[randomIndex]);
+        setCurrentIndex(randomIndex);
       }
     };
 
     fetchMovie();
   }, []);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === weekTrending.length - 1 ? 0 : prev + 1,
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? weekTrending.length - 1 : prev - 1,
+    );
+  };
 
   return (
     <div className={styles.pageContainer}>
@@ -44,42 +56,58 @@ const Trending = ({ handleWatchTrailer }) => {
         <div className={styles.heroImageContainer}>
           <h3>Trending this week</h3>
 
-          {featuredMovie && (
+          <div className={styles.slider}>
+            <button className={styles.sliderBtnLeft} onClick={handlePrev}>
+              <ChevronLeft />
+            </button>
+
+            <button className={styles.sliderBtnRight} onClick={handleNext}>
+              <ChevronRight />
+            </button>
+
+            {/* ----- SLIDE TRACK ----- */}
             <div
-              className={styles.movieDetail}
-              style={{
-                backgroundImage: featuredMovie
-                  ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${featuredMovie.backdrop_path})`
-                  : "none",
-
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
+              className={styles.sliderTrack}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              <div className={styles.overlay}>
-                <h1>{featuredMovie.title}</h1>
-                <p>{featuredMovie.overview}</p>
+              {weekTrending.map((movie) => (
+                <div
+                  className={styles.movieDetail}
+                  style={{
+                    backgroundImage: movie
+                      ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${movie.backdrop_path})`
+                      : "none",
 
-                <div className={styles.cta}>
-                  <button
-                    className={styles.trailerBtn}
-                    onClick={() => handleWatchTrailer(featuredMovie)}
-                  >
-                    <Play fill="#fff" className={styles.playIcon} /> Watch
-                    Trailer
-                  </button>
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  <div className={styles.overlay}>
+                    <h1>{movie.title}</h1>
+                    <p>{movie.overview}</p>
 
-                  <button
-                    onClick={() => addToWatchlist(featuredMovie)}
-                    className={styles.watchlistBtn}
-                  >
-                    Add to Watchlist <ArrowRight />
-                  </button>
+                    <div className={styles.cta}>
+                      <button
+                        className={styles.trailerBtn}
+                        onClick={() => handleWatchTrailer(movie)}
+                      >
+                        <Play fill="#fff" className={styles.playIcon} /> Watch
+                        Trailer
+                      </button>
+
+                      <button
+                        onClick={() => addToWatchlist(movie)}
+                        className={styles.watchlistBtn}
+                      >
+                        Add to Watchlist <ArrowRight />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          )}
+          </div>
         </div>
       </section>
 

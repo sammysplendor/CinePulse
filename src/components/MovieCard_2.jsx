@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Modal from "./modal";
 
-const MovieCard_2 = ({ movie, genres }) => {
+const MovieCard_2 = ({ movie, genres, handleWatchTrailer }) => {
   const title = movie.title ?? movie?.name ?? "Untitled";
   const date = movie?.release_date ?? movie?.first_air_date;
   const releaseYear = date ? new Date(date).getFullYear() : "N/A";
@@ -44,6 +44,7 @@ const MovieCard_2 = ({ movie, genres }) => {
           movie={selectedMovie}
           genres={genres}
           onClose={() => setOpenModal(false)}
+          handleWatchTrailer={handleWatchTrailer}
         />
       )}
     </div>

@@ -14,7 +14,7 @@ import MovieCard_2 from "../../components/MovieCard_2";
 import useWatchlist from "../../hooks/useWatchlist";
 import { useNavigate } from "react-router-dom";
 
-const Explore = () => {
+const Explore = ({ handleWatchTrailer }) => {
   let navigate = useNavigate();
 
   const { addToWatchlist } = useWatchlist();
@@ -187,6 +187,7 @@ const Explore = () => {
             movie={movie}
             genres={genres}
             onAddToWatchlist={addToWatchlist}
+            handleWatchTrailer={handleWatchTrailer}
           />
         ))}
 
@@ -196,6 +197,7 @@ const Explore = () => {
             movie={movie}
             genres={genres}
             onAddToWatchlist={addToWatchlist}
+            handleWatchTrailer={handleWatchTrailer}
           />
         ))}
 
@@ -205,6 +207,7 @@ const Explore = () => {
             movie={movie}
             genres={genres}
             onAddToWatchlist={addToWatchlist}
+            handleWatchTrailer={handleWatchTrailer}
           />
         ))}
 
@@ -214,6 +217,7 @@ const Explore = () => {
             movie={movie}
             genres={genres}
             onAddToWatchlist={addToWatchlist}
+            handleWatchTrailer={handleWatchTrailer}
           />
         ))}
 
@@ -224,6 +228,7 @@ const Explore = () => {
               movie={movie}
               genres={genres}
               onAddToWatchlist={addToWatchlist}
+              handleWatchTrailer={handleWatchTrailer}
             />
           ))}
       </section>

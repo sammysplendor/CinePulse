@@ -7,7 +7,7 @@ import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
 
-const Trending = () => {
+const Trending = ({ handleWatchTrailer }) => {
   const [weekTrending, setWeekTrending] = useState([]);
   const [featuredMovie, setFeaturedMovie] = useState(null);
 
@@ -62,7 +62,10 @@ const Trending = () => {
                 <p>{featuredMovie.overview}</p>
 
                 <div className={styles.cta}>
-                  <button className={styles.trailerBtn}>
+                  <button
+                    className={styles.trailerBtn}
+                    onClick={() => handleWatchTrailer(featuredMovie)}
+                  >
                     <Play fill="#fff" className={styles.playIcon} /> Watch
                     Trailer
                   </button>

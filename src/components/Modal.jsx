@@ -2,7 +2,13 @@ import styles from "./Modal.module.css";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../constants/config";
 import { Play, ArrowRight } from "lucide-react";
 
-const Modal = ({ movie, genres, onAddToWatchlist, onClose }) => {
+const Modal = ({
+  movie,
+  genres,
+  onAddToWatchlist,
+  onClose,
+  handleWatchTrailer,
+}) => {
   const title = movie?.title ?? movie?.name ?? "Untitled";
   const date = movie?.release_date ?? movie?.first_air_date ?? "Unknown";
   const releaseYear = date ? new Date(date).getFullYear() : "N/A";
@@ -41,7 +47,10 @@ const Modal = ({ movie, genres, onAddToWatchlist, onClose }) => {
         </div>
 
         <div className={styles.cta}>
-          <button className={styles.trailerBtn}>
+          <button
+            className={styles.trailerBtn}
+            onClick={() => handleWatchTrailer(movie)}
+          >
             <Play fill="#fff" className={styles.playIcon} /> Watch Trailer
           </button>
 

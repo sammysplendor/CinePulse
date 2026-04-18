@@ -25,6 +25,7 @@ main {
   position: absolute;
   content: "";
   inset: 0;
+  pointer-events: none;
   background: rgba(0, 0, 0, 0.6);
   border-radius: var(--br-md);
 }
@@ -50,11 +51,11 @@ main {
 }
 
 .slider {
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   width: 100%;
   height: 100%;
-  z-index: 40;
+  /* z-index: 40; */
 }
 
 .sliderTrack {
@@ -84,17 +85,18 @@ main {
 }
 
 .sliderBtnLeft {
-  left: 2px;
+  left: -30px;
 }
 
 .sliderBtnRight {
-  right: 2px;
+  right: -30px;
 }
 
 .slide {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding-inline: 3.5rem;
+  padding-inline: 2rem;
   min-width: 100%;
 }
 
@@ -220,5 +222,17 @@ main {
 
   .pageContainer {
     padding-inline: 2.5rem;
+  }
+
+  .sliderBtnLeft {
+    left: -25px;
+  }
+
+  .sliderBtnRight {
+    right: -25px;
+  }
+
+  .trailerBtn {
+    width: 100%;
   }
 }

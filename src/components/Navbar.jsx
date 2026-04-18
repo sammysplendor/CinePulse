@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.css";
 import cinepulseLogo from "../assets/CinePulse_Logo.png";
 import { NavLink } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const getLinkClass = ({ isActive }) =>
@@ -54,7 +54,11 @@ const Navbar = ({ onOpenWatchlist }) => {
           aria-label="Toggle menu"
           aria-expanded={openMenu}
         >
-          <Menu className={styles.menuIcon} />
+          {!openMenu ? (
+            <Menu className={styles.menuIcon} />
+          ) : (
+            <X className={styles.menuIcon} />
+          )}
         </button>
 
         <div className={`${styles.mobileMenu} ${openMenu ? styles.open : ""}`}>

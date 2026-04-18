@@ -49,10 +49,7 @@
 
 .released {
   font-size: 1.2rem;
-  background: var(--color-accent);
-  color: var(--base);
-  padding: 0.9rem 2rem;
-  border-radius: var(--br-lg);
+  color: var(--color-accent);
 }
 
 .deleteIcon {

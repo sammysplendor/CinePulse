@@ -172,4 +172,17 @@
   .moviecardGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .trailerBtn,
+  .watchlistBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

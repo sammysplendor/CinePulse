@@ -12,7 +12,7 @@ const useWatchTrailer = () => {
       return;
     }
 
-    const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
+    const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?playsinline=1`;
 
     setTrailerURL(trailerUrl);
   };

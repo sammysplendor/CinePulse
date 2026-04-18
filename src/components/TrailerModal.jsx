@@ -12,10 +12,10 @@ const TrailerModal = ({ trailerURL, onClose }) => {
         <iframe
           key={trailerURL}
           width="100%"
-          height="450"
-          src={trailerURL}
+          src={`${trailerURL}`}
           title="Trailer"
           frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </div>

@@ -8,7 +8,7 @@ import {
   getPopularMovies,
   getTV_popular,
   getTV_topRated,
-} from "../../services/movieApi";
+} from "../services/movieApi";
 import Navbar from "../../components/Navbar";
 import MovieCard_2 from "../../components/MovieCard_2";
 import useWatchlist from "../../hooks/useWatchlist";

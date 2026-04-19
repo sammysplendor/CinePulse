@@ -1,6 +1,6 @@
 import styles from "../style/Trending.module.css";
 import Navbar from "../../components/Navbar";
-import { getTopTrending } from "../../services/movieApi";
+import { getTopTrending } from "../services/movieApi";
 import { useState, useEffect } from "react";
 import { Play, ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";

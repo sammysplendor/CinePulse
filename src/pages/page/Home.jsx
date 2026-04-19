@@ -1,6 +1,6 @@
 import styles from "../style/Home.module.css";
 import { useEffect, useState } from "react";
-import { getTopTrending, getTopRated } from "../../services/movieapi";
+import { getTopTrending, getTopRated } from "../../services/movieApi";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";

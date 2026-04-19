@@ -50,6 +50,7 @@ const Trending = ({ handleWatchTrailer }) => {
       <section className={styles.heroContent}>
         <div className={styles.heroTxt}>
           <h1>Trending Movies</h1>
+
           <p>Discover what everyone is watching and talking about right now.</p>
         </div>
 

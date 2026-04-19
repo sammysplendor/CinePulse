@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getTrailer } from "../services/movieapi";
+import { getTrailer } from "../services/movieApi";
 
 const useWatchTrailer = () => {
   const [trailerURL, setTrailerURL] = useState("");

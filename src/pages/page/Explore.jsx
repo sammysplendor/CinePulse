@@ -19,14 +19,8 @@ const Explore = ({ handleWatchTrailer }) => {
 
   const { addToWatchlist } = useWatchlist();
 
+  const [content, setContent] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [_selectedGenre, setSelectedGenre] = useState([]);
-  const [movies, setMovies] = useState([]);
-
-  const [popular, setPopular] = useState([]);
-
-  const [popularSeries, setPopularSeries] = useState([]);
-  const [topRatedSeries, setTopRatedSeries] = useState([]);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -46,16 +40,14 @@ const Explore = ({ handleWatchTrailer }) => {
   }, []);
 
   const handleGenreSelect = async (genreId) => {
-    setSelectedGenre(genreId);
-
     const movies = await getMovieByGenre(genreId);
-    setMovies(movies);
+    setContent(movies);
   };
 
   const handlePopularMovies = async () => {
     const popularMovies = await getPopularMovies();
 
-    setPopular(popularMovies);
+    setContent(popularMovies);
   };
 
   const handleTVSeries = async (e) => {
@@ -66,19 +58,19 @@ const Explore = ({ handleWatchTrailer }) => {
       console.log("Popular TV series:", popularTVSeries);
       const updated = popularTVSeries.map((item) => ({
         ...item,
-        media_type: item.first_air_date ? "tv" : "movie",
+        media_type: "tv",
       }));
-      setPopularSeries(updated);
+      setContent(updated);
     }
 
     if (value === "top rated") {
       const topRatedTVSeries = await getTV_topRated();
       const updated = topRatedTVSeries.map((item) => ({
         ...item,
-        media_type: item.first_air_date ? "tv" : "movie",
+        media_type: "tv",
       }));
       console.log("Top rated TV series:", updated);
-      setTopRatedSeries(updated);
+      setContent(updated);
     }
   };
 
@@ -189,37 +181,7 @@ const Explore = ({ handleWatchTrailer }) => {
       {/* ========== RESULT DISPLAY SECTION ========== */}
 
       <section className={styles.resultDisplay}>
-        {movies.map((movie) => (
-          <MovieCard_2
-            key={movie.id}
-            movie={movie}
-            genres={genres}
-            onAddToWatchlist={addToWatchlist}
-            handleWatchTrailer={handleWatchTrailer}
-          />
-        ))}
-
-        {popular.map((movie) => (
-          <MovieCard_2
-            key={movie.id}
-            movie={movie}
-            genres={genres}
-            onAddToWatchlist={addToWatchlist}
-            handleWatchTrailer={handleWatchTrailer}
-          />
-        ))}
-
-        {popularSeries.map((movie) => (
-          <MovieCard_2
-            key={movie.id}
-            movie={movie}
-            genres={genres}
-            onAddToWatchlist={addToWatchlist}
-            handleWatchTrailer={handleWatchTrailer}
-          />
-        ))}
-
-        {topRatedSeries.map((movie) => (
+        {content.map((movie) => (
           <MovieCard_2
             key={movie.id}
             movie={movie}

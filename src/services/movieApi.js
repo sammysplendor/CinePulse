@@ -90,16 +90,41 @@ export const getTV_topRated = async () => {
 
 // =============== Fetch Trailers =============== //
 
-export const getMovieTrailer = async (movieId) => {
-  try {
-    const response = await api.get(`movie/${movieId}/videos`);
-    const trailers = response.data.results;
+// export const getMovieTrailer = async (movieId) => {
+//   try {
+//     const response = await api.get(`movie/${movieId}/videos`);
+//     const trailers = response.data.results;
 
-    const trailer = trailers.find(
+//     const trailer = trailers.find(
+//       (video) => video.type === "Trailer" && video.site === "YouTube",
+//     );
+//     return trailer ? trailer.key : "null";
+//   } catch (error) {
+//     console.error("Error fetching trailer:", error);
+//   }
+// };
+
+export const getTrailer = async (id, mediaType = "movie") => {
+  try {
+    const endpoint =
+      mediaType === "tv" ? `tv/${id}/videos` : `movie/${id}/videos`;
+
+    const response = await api.get(endpoint);
+    const videos = response.data.results;
+
+    if (!videos || videos.length === 0) return null;
+
+    // Prefer official YouTube trailer
+    const trailer = videos.find(
       (video) => video.type === "Trailer" && video.site === "YouTube",
     );
-    return trailer ? trailer.key : "null";
+
+    // Fallback: any YouTube video
+    const fallback = videos.find((video) => video.site === "YouTube");
+
+    return trailer?.key || fallback?.key || null;
   } catch (error) {
     console.error("Error fetching trailer:", error);
+    return null;
   }
 };

@@ -33,6 +33,25 @@ iframe {
   cursor: pointer;
 }
 
+/* ----- Fallback ----- */
+.fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.youtubeBtn {
+  padding: 0.8rem 1.2rem;
+  background: var(--color-primary);
+  color: var(--text-primary);
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* =============== RESPONSIVENESS =============== */
 
 /* ===== ≤ 768px (Small Tablets/Large Phones) ===== */

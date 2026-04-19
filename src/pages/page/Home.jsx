@@ -19,7 +19,12 @@ const Home = ({ handleWatchTrailer }) => {
       const topRatedMovies = await getTopRated();
       console.log("Top rated movies fetched:", topRatedMovies);
 
-      setTopTrending(trendingMovies);
+      const updated = trendingMovies.map((item) => ({
+        ...item,
+        media_type: item.first_air_date ? "tv" : "movie",
+      }));
+
+      setTopTrending(updated);
       setTopRated(topRatedMovies);
 
       // Pick a random movie for the spotlight

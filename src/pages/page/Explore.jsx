@@ -64,13 +64,21 @@ const Explore = ({ handleWatchTrailer }) => {
     if (value === "popular") {
       const popularTVSeries = await getTV_popular();
       console.log("Popular TV series:", popularTVSeries);
-      setPopularSeries(popularTVSeries);
+      const updated = popularTVSeries.map((item) => ({
+        ...item,
+        media_type: item.first_air_date ? "tv" : "movie",
+      }));
+      setPopularSeries(updated);
     }
 
     if (value === "top rated") {
       const topRatedTVSeries = await getTV_topRated();
-      console.log("Top rated TV series:", topRatedTVSeries);
-      setTopRatedSeries(topRatedTVSeries);
+      const updated = topRatedTVSeries.map((item) => ({
+        ...item,
+        media_type: item.first_air_date ? "tv" : "movie",
+      }));
+      console.log("Top rated TV series:", updated);
+      setTopRatedSeries(updated);
     }
   };
 

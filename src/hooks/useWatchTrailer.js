@@ -1,23 +1,26 @@
 import { useState } from "react";
-import { getMovieTrailer } from "../services/movieapi";
+import { getTrailer } from "../services/movieapi";
 
 const useWatchTrailer = () => {
   const [trailerURL, setTrailerURL] = useState("");
+  const [trailerKey, setTrailerKey] = useState("");
 
-  const handleWatchTrailer = async (movie) => {
-    const trailerKey = await getMovieTrailer(movie.id);
+  const handleWatchTrailer = async (item) => {
+    const key = await getTrailer(item.id, item.movie_type);
 
-    if (!trailerKey) {
+    if (!key) {
       alert("Trailer not available");
       return;
     }
 
-    const trailerUrl = `https://www.youtube.com/embed/${trailerKey}?playsinline=1`;
+    setTrailerKey(key);
+
+    const trailerUrl = `https://www.youtube.com/embed/${key}`;
 
     setTrailerURL(trailerUrl);
   };
 
-  return { trailerURL, setTrailerURL, handleWatchTrailer };
+  return { trailerURL, trailerKey, setTrailerURL, handleWatchTrailer };
 };
 
 export default useWatchTrailer;

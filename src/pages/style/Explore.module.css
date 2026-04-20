@@ -110,6 +110,10 @@
     padding-inline: 3rem;
   }
 
+  .heroContent button {
+    width: 100%;
+  }
+
   .resultDisplay {
     grid-template-columns: repeat(3, 1fr);
   }

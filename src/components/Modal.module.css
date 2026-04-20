@@ -96,3 +96,25 @@
 .cta .closeBtn:hover {
   background: var(--surface-medium);
 }
+
+/* =============== RESPONSIVENESS =============== */
+
+/* ===== ≤ 768px (Small Tablets/Large Phones) ===== */
+@media (max-width: 48rem) {
+  /* 768px / 16px = 48rem */
+
+  .modalContainer {
+    width: 80%;
+  }
+
+  .cta {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .trailerBtn,
+  .watchlistBtn,
+  .closeBtn {
+    width: 100%;
+  }
+}

@@ -1,16 +1,21 @@
-# React + Vite
+# CinePulse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React movie discovery app using the TMDB API to browse trending films, filter results, and watch trailers.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+CinePulse is a modern movie discovery platform focused on delivering a fast, intuitive, and visually engaging experience for exploring films.
 
-## React Compiler
+The application allows users to discover trending movies, filter content based on preferences, and watch trailers — all within a clean, cinematic interface.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project emphasizes **scalable frontend architecture, API integration, and production-ready UI patterns.**
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Browse trending movies (daily/weekly)
+- Advanced filtering (genre, year, popularity, TV series)
+- Watch official trailers via YouTube integration
+- Clean, responsive dashboard (Home page) UI
+- Smart content organization (Trending, Explore, Watchlist)
+- Fast loading states and optimized API calls
+

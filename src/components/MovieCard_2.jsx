@@ -2,7 +2,7 @@ import styles from "./MovieCard_2.module.css";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../constants/config";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import Modal from "./modal";
+import Modal from "./Modal";
 
 const MovieCard_2 = ({
   movie,

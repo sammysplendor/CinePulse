@@ -62,7 +62,10 @@ const Navbar = ({ onOpenWatchlist }) => {
         </button>
 
         <div className={`${styles.mobileMenu} ${openMenu ? styles.open : ""}`}>
-          <NavItems onOpenWatchlist={onOpenWatchlist} />
+          <NavItems
+            onOpenWatchlist={onOpenWatchlist}
+            onClick={() => setOpenMenu(false)}
+          />
         </div>
       </div>
     </nav>

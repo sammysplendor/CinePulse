@@ -132,6 +132,7 @@ const Home = ({ handleWatchTrailer }) => {
         </section>
       </main>
 
+      {/* ========== WATCHLIST SECTION ========== */}
       <aside
         className={`${styles.sidebar} ${openWatchlist ? styles.open : ""}`}
       >

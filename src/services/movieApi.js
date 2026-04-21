@@ -90,20 +90,6 @@ export const getTV_topRated = async () => {
 
 // =============== Fetch Trailers =============== //
 
-// export const getMovieTrailer = async (movieId) => {
-//   try {
-//     const response = await api.get(`movie/${movieId}/videos`);
-//     const trailers = response.data.results;
-
-//     const trailer = trailers.find(
-//       (video) => video.type === "Trailer" && video.site === "YouTube",
-//     );
-//     return trailer ? trailer.key : "null";
-//   } catch (error) {
-//     console.error("Error fetching trailer:", error);
-//   }
-// };
-
 export const getTrailer = async (id, mediaType = "movie") => {
   try {
     const endpoint =

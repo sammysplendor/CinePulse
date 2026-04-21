@@ -17,7 +17,6 @@ const Home = ({ handleWatchTrailer }) => {
     const fetchMovie = async () => {
       const trendingMovies = await getTopTrending("day");
       const topRatedMovies = await getTopRated();
-      console.log("Top rated movies fetched:", topRatedMovies);
 
       const updated = trendingMovies.map((item) => ({
         ...item,

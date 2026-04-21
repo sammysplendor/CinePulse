@@ -74,7 +74,7 @@ li {
   background: var(--base);
   padding: 2.5rem;
   height: 100vh;
-  width: 50%;
+  width: 60%;
 
   display: flex;
   flex-direction: column;
@@ -111,7 +111,6 @@ li {
   /* 768px / 16px = 48rem */
 
   .navbarContainer {
-    z-index: 40;
     padding-inline: 3rem;
   }
 
@@ -131,24 +130,18 @@ li {
 
   .activeLink,
   .inactiveLink {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .openWatchlistBtn {
     display: block;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background: var(--surface-low);
     padding: 1rem 2rem;
     border-radius: var(--br-sm);
     text-align: left;
     margin-top: 10rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .openWatchlistBtn:hover {
-    background: var(--surface-medium);
-    color: var(--text-primary);
   }
 }
 

@@ -8,6 +8,8 @@ import {
   getPopularMovies,
   getTV_popular,
   getTV_topRated,
+  getTopTrending,
+  getTopRated,
 } from "../../services/movieApi";
 import Navbar from "../../components/Navbar";
 import MovieCard_2 from "../../components/MovieCard_2";
@@ -82,9 +84,23 @@ const Explore = ({ handleWatchTrailer }) => {
   useEffect(() => {
     const fetchAnyMovies = async () => {
       const fetchedPopularMovies = await getPopularMovies();
+      const fetchedTrendingMovies = await getTopTrending("day");
+      const fetchedTopRatedMovies = await getTopRated();
+      const fetchedTVSeries = await getTV_popular();
       const fetchedGenre = await getGenres();
       const fetchedTVGenre = await getTVGenres();
-      setSearchResult(fetchedPopularMovies);
+
+      const allMovies = [
+        ...fetchedPopularMovies,
+        ...fetchedTrendingMovies,
+        ...fetchedTopRatedMovies,
+        ...fetchedTVSeries,
+      ];
+
+      const uniqueMovies = [
+        ...new Map(allMovies.map((movie) => [movie.id, movie])).values(),
+      ];
+      setSearchResult(uniqueMovies);
 
       const combinedFetchedGenres = [...fetchedGenre, ...fetchedTVGenre];
       const uniqueGenres = [
@@ -106,7 +122,10 @@ const Explore = ({ handleWatchTrailer }) => {
 
   const filteredMovies = searchTerm
     ? searchResult.filter((movie) => {
-        const matchesTitle = movie?.title?.toLowerCase().includes(searchTerm);
+        const matchesTitle =
+          movie?.title?.toLowerCase().includes(searchTerm) ||
+          movie?.name?.toLowerCase().includes(searchTerm) ||
+          "";
 
         const matchesGenre = movie?.genre_ids?.some((id) =>
           matchedGenreIds.includes(id),

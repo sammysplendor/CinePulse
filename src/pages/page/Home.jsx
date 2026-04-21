@@ -50,7 +50,7 @@ const Home = ({ handleWatchTrailer }) => {
 
   return (
     <div className={styles.pageContainer}>
-      <Navbar onOpenWatchlist={() => setOpenWatchlist(true)} />
+      <Navbar setOpenWatchlist={setOpenWatchlist} />
 
       <main>
         <section

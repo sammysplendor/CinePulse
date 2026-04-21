@@ -7,7 +7,7 @@ import { useState } from "react";
 const getLinkClass = ({ isActive }) =>
   isActive ? styles.activeLink : styles.inactiveLink;
 
-const NavItems = ({ onClick, onOpenWatchlist }) => (
+const NavItems = ({ onClick }) => (
   <>
     <NavLink to="/" className={getLinkClass} onClick={onClick}>
       Home
@@ -19,7 +19,7 @@ const NavItems = ({ onClick, onOpenWatchlist }) => (
       Trending
     </NavLink>
 
-    <button
+    {/* <button
       className={styles.openWatchlistBtn}
       onClick={() => {
         onClick?.();
@@ -27,11 +27,11 @@ const NavItems = ({ onClick, onOpenWatchlist }) => (
       }}
     >
       See Watchlist
-    </button>
+    </button> */}
   </>
 );
 
-const Navbar = ({ onOpenWatchlist }) => {
+const Navbar = ({ onOpenWatchlist, setOpenWatchlist }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const handleMenu = () => {
     setOpenMenu((prev) => !prev);
@@ -48,18 +48,27 @@ const Navbar = ({ onOpenWatchlist }) => {
 
       {/* --- Mobile --- */}
       <div className={styles.menu}>
-        <button
-          className={styles.menuBtn}
-          onClick={handleMenu}
-          aria-label="Toggle menu"
-          aria-expanded={openMenu}
-        >
-          {!openMenu ? (
-            <Menu className={styles.menuIcon} />
-          ) : (
-            <X className={styles.menuIcon} />
-          )}
-        </button>
+        <div className={styles.rightside}>
+          <button
+            className={styles.openWatchlistBtn}
+            onClick={() => setOpenWatchlist(true)}
+          >
+            See Watchlist
+          </button>
+
+          <button
+            className={styles.menuBtn}
+            onClick={handleMenu}
+            aria-label="Toggle menu"
+            aria-expanded={openMenu}
+          >
+            {!openMenu ? (
+              <Menu className={styles.menuIcon} />
+            ) : (
+              <X className={styles.menuIcon} />
+            )}
+          </button>
+        </div>
 
         <div className={`${styles.mobileMenu} ${openMenu ? styles.open : ""}`}>
           <NavItems

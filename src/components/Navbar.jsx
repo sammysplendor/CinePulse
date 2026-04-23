@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css";
-import cinepulseLogo from "../assets/CinePulse_Logo.png";
+import cinepulseLogo from "../assets/cinepulse_logo.png";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -18,16 +18,6 @@ const NavItems = ({ onClick }) => (
     <NavLink to="/trending" className={getLinkClass} onClick={onClick}>
       Trending
     </NavLink>
-
-    {/* <button
-      className={styles.openWatchlistBtn}
-      onClick={() => {
-        onClick?.();
-        onOpenWatchlist?.();
-      }}
-    >
-      See Watchlist
-    </button> */}
   </>
 );
 

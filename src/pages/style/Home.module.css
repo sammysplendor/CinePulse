@@ -2,13 +2,42 @@
 
 .pageContainer {
   min-height: 100vh;
-  padding: 14rem 7rem 5rem;
+  padding: 11rem 7rem 5rem;
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
 }
 
 main {
   width: 70%;
+}
+
+.pageDescription {
+  width: 100%;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-block: 1px solid var(--text-secondary);
+  padding-block: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+small {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.mainContent {
+  display: flex;
+  gap: 3rem;
 }
 
 /* ---------- Hero Section ---------- */

@@ -7,6 +7,7 @@ import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
 import WatchlistCard from "../../components/WatchlistCard";
 import Navbar from "../../components/Navbar";
+import { Helmet } from "react-helmet";
 
 const Home = ({ handleWatchTrailer }) => {
   const [topTrending, setTopTrending] = useState([]);
@@ -49,119 +50,142 @@ const Home = ({ handleWatchTrailer }) => {
   const [openWatchlist, setOpenWatchlist] = useState(false);
 
   return (
-    <div className={styles.pageContainer}>
-      <Navbar setOpenWatchlist={setOpenWatchlist} />
+    <>
+      <Helmet>
+        <title>CinePulse - Discover Trending Movies & Recommendations</title>
+        <meta
+          name="description"
+          content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
+        />
+      </Helmet>
 
-      <main>
-        <section
-          className={styles.heroSection}
-          style={{
-            backgroundImage: topTrending[currentIndex]
-              ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${topTrending[currentIndex].backdrop_path})`
-              : "/no-image.png",
+      <div className={styles.pageContainer}>
+        <Navbar setOpenWatchlist={setOpenWatchlist} />
 
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className={styles.leftContent}>
-            <h3>Top Trending Spotlight</h3>
+        <span className={styles.pageDescription}>
+          <h4>Discover Trending Movies Instantly</h4>
+          <small>
+            CinePulse helps you find the best movies, explore trending films,
+            and discover what to watch next - all in one place.
+          </small>
+        </span>
 
-            <div className={styles.slider}>
-              <button className={styles.sliderBtnLeft} onClick={handlePrev}>
-                <ChevronLeft />
-              </button>
+        <div className={styles.mainContent}>
+          <main>
+            <section
+              className={styles.heroSection}
+              style={{
+                backgroundImage: topTrending[currentIndex]
+                  ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${topTrending[currentIndex].backdrop_path})`
+                  : "/no-image.png",
 
-              <button className={styles.sliderBtnRight} onClick={handleNext}>
-                <ChevronRight />
-              </button>
-
-              {/* ----- SLIDER TRACK ----- */}
-              <div
-                className={styles.sliderTrack}
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              >
-                {topTrending.map((movie) => (
-                  <div className={styles.slide} key={movie.id}>
-                    <div className={styles.movieDetail}>
-                      <h1>{movie.title}</h1>
-                      <p>{movie.overview}</p>
-
-                      <button
-                        className={styles.trailerBtn}
-                        onClick={() => handleWatchTrailer(movie)}
-                      >
-                        <Play fill="#fff" className={styles.playIcon} /> Watch
-                        Trailer
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.trendingSection}>
-          <h3>Trending Now in Real Time</h3>
-
-          <div className={styles.cardGrid}>
-            {topTrending.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                onAddToWatchlist={addToWatchlist}
-              />
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.topRatedSection}>
-          <h3>Top Rated Movies</h3>
-
-          <div className={styles.cardGrid}>
-            {topRated.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                onAddToWatchlist={addToWatchlist}
-              />
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {/* ========== WATCHLIST SECTION ========== */}
-      <aside
-        className={`${styles.sidebar} ${openWatchlist ? styles.open : ""}`}
-      >
-        <section className={styles.watchlistContainer}>
-          <h3>
-            My Pulse Watchlist
-            <button
-              className={styles.closeWatchlist}
-              onClick={() => {
-                setOpenWatchlist(false);
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
               }}
             >
-              Close
-            </button>
-          </h3>
+              <div className={styles.leftContent}>
+                <h3>Top Trending Spotlight</h3>
 
-          <div className={styles.watchlist}>
-            {watchlist?.map((movie) => (
-              <WatchlistCard
-                key={movie.id}
-                movie={movie}
-                onRemove={removeFromWatchlist}
-                handleWatchTrailer={handleWatchTrailer}
-              />
-            ))}
-          </div>
-        </section>
-      </aside>
-    </div>
+                <div className={styles.slider}>
+                  <button className={styles.sliderBtnLeft} onClick={handlePrev}>
+                    <ChevronLeft />
+                  </button>
+
+                  <button
+                    className={styles.sliderBtnRight}
+                    onClick={handleNext}
+                  >
+                    <ChevronRight />
+                  </button>
+
+                  {/* ----- SLIDER TRACK ----- */}
+                  <div
+                    className={styles.sliderTrack}
+                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                  >
+                    {topTrending.map((movie) => (
+                      <div className={styles.slide} key={movie.id}>
+                        <div className={styles.movieDetail}>
+                          <h1>{movie.title}</h1>
+                          <p>{movie.overview}</p>
+
+                          <button
+                            className={styles.trailerBtn}
+                            onClick={() => handleWatchTrailer(movie)}
+                          >
+                            <Play fill="#fff" className={styles.playIcon} />{" "}
+                            Watch Trailer
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className={styles.trendingSection}>
+              <h3>Trending Now in Real Time</h3>
+
+              <div className={styles.cardGrid}>
+                {topTrending.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onAddToWatchlist={addToWatchlist}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section className={styles.topRatedSection}>
+              <h3>Top Rated Movies</h3>
+
+              <div className={styles.cardGrid}>
+                {topRated.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onAddToWatchlist={addToWatchlist}
+                  />
+                ))}
+              </div>
+            </section>
+          </main>
+
+          {/* ========== WATCHLIST SECTION ========== */}
+          <aside
+            className={`${styles.sidebar} ${openWatchlist ? styles.open : ""}`}
+          >
+            <section className={styles.watchlistContainer}>
+              <h3>
+                My Pulse Watchlist
+                <button
+                  className={styles.closeWatchlist}
+                  onClick={() => {
+                    setOpenWatchlist(false);
+                  }}
+                >
+                  Close
+                </button>
+              </h3>
+
+              <div className={styles.watchlist}>
+                {watchlist?.map((movie) => (
+                  <WatchlistCard
+                    key={movie.id}
+                    movie={movie}
+                    onRemove={removeFromWatchlist}
+                    handleWatchTrailer={handleWatchTrailer}
+                  />
+                ))}
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </>
   );
 };
 

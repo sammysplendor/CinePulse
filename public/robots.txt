@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cinepulse-xi.vercel.app/sitemap.xml

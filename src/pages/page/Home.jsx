@@ -62,7 +62,7 @@ const Home = ({ handleWatchTrailer }) => {
       <div className={styles.pageContainer}>
         <Navbar setOpenWatchlist={setOpenWatchlist} />
 
-        <span className={styles.pageDescription}>
+        <span className={styles.seoSection}>
           <h4>Discover Trending Movies Instantly</h4>
           <small>
             CinePulse helps you find the best movies, explore trending films,

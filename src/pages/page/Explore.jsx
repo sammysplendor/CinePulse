@@ -136,82 +136,80 @@ const Explore = ({ handleWatchTrailer }) => {
     : [];
 
   return (
-    <div className={styles.pageContainer}>
-      <Navbar />
+    <>
+      <Helmet>
+        <title>CinePulse - Explore Movies</title>
+        <meta
+          name="description"
+          content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
+        />
+      </Helmet>
 
-      <div className={styles.searchBarContainer}>
-        <div className={styles.searchBar}>
-          <Search className={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="Search movies, actors, genres…"
-            value={searchInput}
-            onChange={(event) => setSearchInput(event.target.value)}
-          />
+      <div className={styles.pageContainer}>
+        <Navbar />
+
+        <div className={styles.searchBarContainer}>
+          <div className={styles.searchBar}>
+            <Search className={styles.searchIcon} />
+            <input
+              type="text"
+              placeholder="Search movies, actors, genres…"
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* =============== HERO SECTION =============== */}
+        {/* =============== HERO SECTION =============== */}
 
-      <section className={styles.heroContent}>
-        <div className={styles.heroTxt}>
-          <h1>Explore Movies</h1>
-          <p>
-            Browse by genre, popularity, or TV series to find your next watch.
-          </p>
-        </div>
+        <section className={styles.heroContent}>
+          <div className={styles.heroTxt}>
+            <h1>Explore Movies</h1>
+            <p>
+              Browse by genre, popularity, or TV series to find your next watch.
+            </p>
+          </div>
 
-        <button onClick={() => navigate("/Trending")}>
-          See Trending Movies
-        </button>
-      </section>
+          <button onClick={() => navigate("/Trending")}>
+            See Trending Movies
+          </button>
+        </section>
 
-      {/* =============== CATEGORY SECTION =============== */}
+        {/* =============== CATEGORY SECTION =============== */}
 
-      <section className={styles.categoryBar}>
-        <select
-          name="category"
-          onChange={(e) => handleGenreSelect(e.target.value)}
-        >
-          <option value="">Genre</option>
+        <section className={styles.categoryBar}>
+          <select
+            name="category"
+            onChange={(e) => handleGenreSelect(e.target.value)}
+          >
+            <option value="">Genre</option>
 
-          {genres.map((genre) => (
-            <option
-              value={genre.id}
-              key={genre.id}
-              onClick={() => handleGenreSelect()}
-            >
-              {genre.name}
-            </option>
-          ))}
-        </select>
+            {genres.map((genre) => (
+              <option
+                value={genre.id}
+                key={genre.id}
+                onClick={() => handleGenreSelect()}
+              >
+                {genre.name}
+              </option>
+            ))}
+          </select>
 
-        <span className={styles.popular} onClick={handlePopularMovies}>
-          Popular
-        </span>
+          <span className={styles.popular} onClick={handlePopularMovies}>
+            Popular
+          </span>
 
-        <select name="category" onChange={handleTVSeries}>
-          <option value="">TV Series</option>
-          <option value="popular">Popular series</option>
-          <option value="top rated">Top rated series</option>
-        </select>
-      </section>
+          <select name="category" onChange={handleTVSeries}>
+            <option value="">TV Series</option>
+            <option value="popular">Popular series</option>
+            <option value="top rated">Top rated series</option>
+          </select>
+        </section>
 
-      {/* ========== RESULT DISPLAY SECTION ========== */}
+        {/* ========== RESULT DISPLAY SECTION ========== */}
 
-      <section className={styles.resultDisplay}>
-        {content.map((movie) => (
-          <MovieCard_2
-            key={movie.id}
-            movie={movie}
-            genres={genres}
-            onAddToWatchlist={addToWatchlist}
-            handleWatchTrailer={handleWatchTrailer}
-          />
-        ))}
-
-        {searchTerm.length > 0 &&
-          filteredMovies.map((movie) => (
+        <section className={styles.resultDisplay}>
+          {content.map((movie) => (
             <MovieCard_2
               key={movie.id}
               movie={movie}
@@ -220,8 +218,20 @@ const Explore = ({ handleWatchTrailer }) => {
               handleWatchTrailer={handleWatchTrailer}
             />
           ))}
-      </section>
-    </div>
+
+          {searchTerm.length > 0 &&
+            filteredMovies.map((movie) => (
+              <MovieCard_2
+                key={movie.id}
+                movie={movie}
+                genres={genres}
+                onAddToWatchlist={addToWatchlist}
+                handleWatchTrailer={handleWatchTrailer}
+              />
+            ))}
+        </section>
+      </div>
+    </>
   );
 };
 

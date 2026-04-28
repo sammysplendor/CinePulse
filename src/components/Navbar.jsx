@@ -18,6 +18,9 @@ const NavItems = ({ onClick }) => (
     <NavLink to="/trending" className={getLinkClass} onClick={onClick}>
       Trending
     </NavLink>
+    <NavLink to="/moviestonight" className={getLinkClass} onClick={onClick}>
+      Movies Tonight
+    </NavLink>
   </>
 );
 

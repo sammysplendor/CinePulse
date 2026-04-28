@@ -1,0 +1,75 @@
+.seoPage {
+  min-height: 100vh;
+  padding: 15rem 7rem 4rem;
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.pageContent h1,
+.pageContent .pageDescription {
+  text-align: center;
+}
+
+.cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  background: var(--surface-low);
+  border: 0.5px solid var(--color-accent);
+  border-radius: var(--br-md);
+  padding: 2rem;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.iconContainer {
+  padding: 1.5rem;
+  border-radius: 50%;
+  background: var(--surface-medium);
+  width: fit-content;
+}
+
+.cardIcon {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* =============== RESPONSIVENESS =============== */
+
+/* ===== ≤ 768px (Small Tablets/Large Phones) ===== */
+@media (max-width: 48rem) {
+  /* 768px / 16px = 48rem */
+
+  .seoPage {
+    padding-inline: 3rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== ≤ 576px (Small Phones) ===== */
+@media (max-width: 36rem) {
+  /* 576px / 16px = 36rem */
+
+  .seoPage {
+    padding-inline: 2.5rem;
+  }
+}

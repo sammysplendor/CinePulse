@@ -52,7 +52,7 @@ const Home = ({ handleWatchTrailer }) => {
   return (
     <>
       <Helmet>
-        <title>CinePulse - Discover Trending Movies & Recommendations</title>
+        <title>CinePulse - Discover Movies</title>
         <meta
           name="description"
           content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."

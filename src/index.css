@@ -19,15 +19,26 @@ h1 {
   color: var(--text-primary);
 }
 
+h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
 h3 {
   font-size: 2rem;
   font-weight: 500;
   color: var(--text-primary);
 }
 
-p {
+p,
+li {
   font-size: 1.5rem;
   color: var(--text-secondary);
+}
+
+li {
+  margin-bottom: 1rem;
 }
 
 button {

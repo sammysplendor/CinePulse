@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/page/Home";
 import Explore from "../pages/page/Explore";
 import Trending from "../pages/page/Trending";
+import MoviesTonight from "../pages/page/MoviesTonight";
 import useWatchTrailer from "../hooks/useWatchTrailer";
 import TrailerModal from "../components/TrailerModal";
 
@@ -22,6 +23,7 @@ const AppRoutes = () => {
           path="/Trending"
           element={<Trending handleWatchTrailer={handleWatchTrailer} />}
         />
+        <Route path="/MoviesTonight" element={<MoviesTonight />} />
       </Routes>
 
       <TrailerModal trailerURL={trailerURL} onClose={() => setTrailerURL("")} />

@@ -211,6 +211,14 @@ small {
     padding-inline: 3rem;
   }
 
+  .seoSection {
+    gap: 2rem;
+  }
+
+  .seoSection h4 {
+    width: 100%;
+  }
+
   main {
     width: 100%;
   }

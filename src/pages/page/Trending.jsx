@@ -6,6 +6,7 @@ import { Play, ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
 import { IMAGE_BASE_URL, IMAGE_SIZES } from "../../constants/config";
 import MovieCard from "../../components/MovieCard";
 import useWatchlist from "../../hooks/useWatchlist";
+import { Helmet } from "react-helmet";
 
 const Trending = ({ handleWatchTrailer }) => {
   const [weekTrending, setWeekTrending] = useState([]);

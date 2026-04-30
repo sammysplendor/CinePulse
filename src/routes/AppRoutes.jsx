@@ -23,7 +23,7 @@ const AppRoutes = () => {
           path="/Trending"
           element={<Trending handleWatchTrailer={handleWatchTrailer} />}
         />
-        <Route path="/MoviesTonight" element={<MoviesTonight />} />
+        <Route path="/movies-to-watch-tonight" element={<MoviesTonight />} />
       </Routes>
 
       <TrailerModal trailerURL={trailerURL} onClose={() => setTrailerURL("")} />

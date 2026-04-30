@@ -17,8 +17,8 @@
 
 .cards {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   margin-top: 4rem;
 }
@@ -58,10 +58,6 @@ a {
 
   .seoPage {
     padding-inline: 3rem;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
   }
 }
 

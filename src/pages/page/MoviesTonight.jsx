@@ -36,30 +36,30 @@ const MoviesTonight = () => {
 
               <ul>
                 <li>
-                  <strong>Sinners (2025)</strong> - A powerful and emotionally
+                  • <strong>Sinners (2025)</strong> - A powerful and emotionally
                   intense drama that blends historical themes with suspense and
                   standout performances.
                 </li>
                 <li>
-                  <strong>Avatar: Fire and Ash (2025)</strong> - A visually
+                  • <strong>Avatar: Fire and Ash (2025)</strong> - A visually
                   stunning sci-fi epic that expands the Avatar universe with new
                   conflicts and breathtaking worlds.
                 </li>
                 <li>
-                  <strong>The Odyssey (2026)</strong> - A grand cinematic
+                  • <strong>The Odyssey (2026)</strong> - A grand cinematic
                   adaptation of the classic myth, combining action, adventure,
                   and storytelling on a massive scale.
                 </li>
                 <li>
-                  <strong>28 Years Later: The Bone Temple (2026)</strong> - A
+                  • <strong>28 Years Later: The Bone Temple (2026)</strong> - A
                   dark and gripping post-apocalyptic thriller exploring survival
                   in a world still recovering from a deadly outbreak.
                 </li>
                 <li>
-                  <strong>War Machine (2026)</strong> - A high-intensity modern
-                  action thriller centered around advanced warfare, strategy,
-                  and global conflict, blending military tension with fast-paced
-                  storytelling.
+                  • <strong>War Machine (2026)</strong> - A high-intensity
+                  modern action thriller centered around advanced warfare,
+                  strategy, and global conflict, blending military tension with
+                  fast-paced storytelling.
                 </li>
               </ul>
             </div>

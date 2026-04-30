@@ -18,11 +18,12 @@ const MoviesTonight = () => {
         <Navbar />
 
         <div className="pageContent">
-          <h1>Movies to Watch Tonight</h1>
+          <h1>Movies to Watch Tonight (2025-2026)</h1>
 
           <p className="pageDescription">
-            Looking for something great to watch tonight? Here are some of the
-            best trending and highly-rated movies you can enjoy right now.
+            Looking for the best movies to watch tonight? Here are some of the
+            most recent and trending films from 2025 and 2026 - carefully
+            selected across different genres to match your mood.
           </p>
 
           <section className="cards">
@@ -31,12 +32,35 @@ const MoviesTonight = () => {
                 <Flame fill="#00ffe1" className="cardIcon" />
               </span>
 
-              <h2>Trending Picks This Week</h2>
+              <h2>Top Picks Right Now</h2>
 
               <ul>
-                <li>Movie 1 - Action Thriller</li>
-                <li>Movie 2 - Sci-Fi Adventure</li>
-                <li>Movie 3 - Horror Crime</li>
+                <li>
+                  <strong>Sinners (2025)</strong> - A powerful and emotionally
+                  intense drama that blends historical themes with suspense and
+                  standout performances.
+                </li>
+                <li>
+                  <strong>Avatar: Fire and Ash (2025)</strong> - A visually
+                  stunning sci-fi epic that expands the Avatar universe with new
+                  conflicts and breathtaking worlds.
+                </li>
+                <li>
+                  <strong>The Odyssey (2026)</strong> - A grand cinematic
+                  adaptation of the classic myth, combining action, adventure,
+                  and storytelling on a massive scale.
+                </li>
+                <li>
+                  <strong>28 Years Later: The Bone Temple (2026)</strong> - A
+                  dark and gripping post-apocalyptic thriller exploring survival
+                  in a world still recovering from a deadly outbreak.
+                </li>
+                <li>
+                  <strong>War Machine (2026)</strong> - A high-intensity modern
+                  action thriller centered around advanced warfare, strategy,
+                  and global conflict, blending military tension with fast-paced
+                  storytelling.
+                </li>
               </ul>
             </div>
 
@@ -48,8 +72,10 @@ const MoviesTonight = () => {
               <h2>Why these movies?</h2>
 
               <p>
-                These movies are selected based on popularity, ratings, and
-                current viewer trends across major platforms.
+                These films are selected based on recent popularity, audience
+                interest, and critical attention. Whether you enjoy action,
+                drama, or thrillers, this list offers some of the best modern
+                options available right now.
               </p>
             </div>
 
@@ -65,7 +91,8 @@ const MoviesTonight = () => {
                 <a href="/explore">
                   <u>Explore Page</u>
                 </a>{" "}
-                to filter movies by genre, title, and popularity.
+                to discover more movies by genre, title, popularity, and find
+                the perfect film for your mood.
               </p>
             </div>
           </section>

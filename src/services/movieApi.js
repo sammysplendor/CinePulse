@@ -114,3 +114,16 @@ export const getTrailer = async (id, mediaType = "movie") => {
     return null;
   }
 };
+
+// =============== Movie Search =============== //
+
+export const searchMovies = async (query) => {
+  try {
+    const response = await api.get("/search/multi", {
+      params: { query },
+    });
+    return response.data.results || [];
+  } catch (error) {
+    console.error("Error fetching searched movie:", error);
+  }
+};

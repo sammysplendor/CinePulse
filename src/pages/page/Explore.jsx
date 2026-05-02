@@ -8,8 +8,7 @@ import {
   getPopularMovies,
   getTV_popular,
   getTV_topRated,
-  getTopTrending,
-  getTopRated,
+  searchMovies,
 } from "../../services/movieApi";
 import Navbar from "../../components/Navbar";
 import MovieCard_2 from "../../components/MovieCard_2";
@@ -77,31 +76,15 @@ const Explore = ({ handleWatchTrailer }) => {
     }
   };
 
-  // ===== Search system logic ===== //
+  // ========== Search system logic ========== //
   const [searchInput, setSearchInput] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
   const [movieGenre, setMovieGenre] = useState([]);
 
+  // Fetch movies and TV series genres and combine them.
   useEffect(() => {
     const fetchAnyMovies = async () => {
-      const fetchedPopularMovies = await getPopularMovies();
-      const fetchedTrendingMovies = await getTopTrending("day");
-      const fetchedTopRatedMovies = await getTopRated();
-      const fetchedTVSeries = await getTV_popular();
       const fetchedGenre = await getGenres();
       const fetchedTVGenre = await getTVGenres();
-
-      const allMovies = [
-        ...fetchedPopularMovies,
-        ...fetchedTrendingMovies,
-        ...fetchedTopRatedMovies,
-        ...fetchedTVSeries,
-      ];
-
-      const uniqueMovies = [
-        ...new Map(allMovies.map((movie) => [movie.id, movie])).values(),
-      ];
-      setSearchResult(uniqueMovies);
 
       const combinedFetchedGenres = [...fetchedGenre, ...fetchedTVGenre];
       const uniqueGenres = [
@@ -113,28 +96,60 @@ const Explore = ({ handleWatchTrailer }) => {
     fetchAnyMovies();
   }, []);
 
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const searchTerm = searchInput.trim().toLowerCase();
 
-  const matchedGenres = movieGenre.filter((genre) =>
-    genre?.name?.toLowerCase().includes(searchTerm),
-  );
+  // Fetch the searched movies using the search API function
+  useEffect(() => {
+    const fetchSearch = async () => {
+      if (!searchTerm) {
+        setFilteredMovies([]);
+        return;
+      }
 
-  const matchedGenreIds = matchedGenres.map((g) => g.id);
+      const results = await searchMovies(searchTerm);
 
-  const filteredMovies = searchTerm
-    ? searchResult.filter((movie) => {
-        const matchesTitle =
-          movie?.title?.toLowerCase().includes(searchTerm) ||
-          movie?.name?.toLowerCase().includes(searchTerm) ||
-          "";
+      // Filter searched genres to avoid appearing twice for series and movies
+      const matchedGenres = movieGenre.filter((genre) =>
+        genre?.name?.toLowerCase().includes(searchTerm),
+      );
+      const matchedGenreIds = matchedGenres.map((g) => g.id);
+
+      // Filter the searched title to give either a movie or a series
+      const filtered = results.filter((movie) => {
+        const title = (movie.title || movie.name || "").toLowerCase();
+
+        const matchesTitle = title.includes(searchTerm);
 
         const matchesGenre = movie?.genre_ids?.some((id) =>
           matchedGenreIds.includes(id),
         );
 
         return matchesTitle || matchesGenre;
-      })
-    : [];
+      });
+
+      // ----- Deduplicate
+      const uniqueResults = [
+        ...new Map(
+          filtered.map((movie) => {
+            const title = movie.title || movie.name || "";
+            const year =
+              movie.release_date?.split("-")[0] ||
+              movie.first_air_date?.split("-")[0] ||
+              "";
+
+            const mediaType = movie.media_type || "unknown";
+
+            return [`${title}-${year}-${mediaType}`, movie];
+          }),
+        ).values(),
+      ];
+
+      setFilteredMovies(uniqueResults);
+    };
+
+    fetchSearch();
+  }, [searchTerm, movieGenre]);
 
   return (
     <>
@@ -154,7 +169,7 @@ const Explore = ({ handleWatchTrailer }) => {
             <Search className={styles.searchIcon} />
             <input
               type="text"
-              placeholder="Search movies, actors, genres…"
+              placeholder="Search movies by titles and genres…"
               value={searchInput}
               onChange={(event) => setSearchInput(event.target.value)}
             />
@@ -210,7 +225,7 @@ const Explore = ({ handleWatchTrailer }) => {
         {/* ========== RESULT DISPLAY SECTION ========== */}
 
         <section className={styles.resultDisplay}>
-          {content.map((movie) => (
+          {(searchTerm ? filteredMovies : content).map((movie) => (
             <MovieCard_2
               key={movie.id}
               movie={movie}
@@ -219,17 +234,6 @@ const Explore = ({ handleWatchTrailer }) => {
               handleWatchTrailer={handleWatchTrailer}
             />
           ))}
-
-          {searchTerm.length > 0 &&
-            filteredMovies.map((movie) => (
-              <MovieCard_2
-                key={movie.id}
-                movie={movie}
-                genres={genres}
-                onAddToWatchlist={addToWatchlist}
-                handleWatchTrailer={handleWatchTrailer}
-              />
-            ))}
         </section>
       </div>
     </>

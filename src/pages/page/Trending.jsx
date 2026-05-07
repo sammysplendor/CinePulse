@@ -129,7 +129,11 @@ const Trending = ({ handleWatchTrailer }) => {
 
           <div className={styles.moviecardGrid}>
             {weekTrending.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onAddToWatchlist={addToWatchlist}
+              />
             ))}
           </div>
         </section>

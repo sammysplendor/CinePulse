@@ -50,7 +50,7 @@ const Trending = ({ handleWatchTrailer }) => {
         <title>CinePulse - Trending Movies</title>
         <meta
           name="description"
-          content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
+          content="Discover the latest trending movies and popular films people are watching right now with CinePulse."
         />
       </Helmet>
 

@@ -157,7 +157,7 @@ const Explore = ({ handleWatchTrailer }) => {
         <title>CinePulse - Explore Movies</title>
         <meta
           name="description"
-          content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
+          content="Explore movies and TV shows by genre, popularity, and search. Find new releases, popular films, and your next watch on CinePulse."
         />
       </Helmet>
 

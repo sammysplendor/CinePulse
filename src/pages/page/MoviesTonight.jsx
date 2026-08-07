@@ -10,7 +10,7 @@ const MoviesTonight = () => {
         <title>CinePulse - Movies to Watch Tonight</title>
         <meta
           name="description"
-          content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
+          content="Find movies worth watching tonight with CinePulse. Explore recommendations and discover your next movie night pick."
         />
       </Helmet>
 

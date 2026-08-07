@@ -154,11 +154,33 @@ const Explore = ({ handleWatchTrailer }) => {
   return (
     <>
       <Helmet>
-        <title>CinePulse - Explore Movies</title>
+        <title>Explore Movies | CinePulse</title>
         <meta
           name="description"
           content="Explore movies and TV shows by genre, popularity, and search. Find new releases, popular films, and your next watch on CinePulse."
         />
+        <link rel="canonical" href="https://cinepulse-xi.vercel.app/Explore" />
+
+        <meta property="og:title" content="Explore Movies | CinePulse" />
+
+        <meta
+          property="og:description"
+          content="Search and explore movies, genres, popular films, and TV shows with CinePulse."
+        />
+
+        <meta property="og:type" content="website" />
+
+        <meta
+          property="og:url"
+          content="https://cinepulse-xi.vercel.app/Explore"
+        />
+
+        <meta
+          property="og:image"
+          content="https://cinepulse-xi.vercel.app/cinepulse_logo.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div className={styles.pageContainer}>

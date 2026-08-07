@@ -7,11 +7,39 @@ const MoviesTonight = () => {
   return (
     <>
       <Helmet>
-        <title>CinePulse - Movies to Watch Tonight</title>
+        <title>Movies to Watch Tonight | CinePulse</title>
         <meta
           name="description"
           content="Find movies worth watching tonight with CinePulse. Explore recommendations and discover your next movie night pick."
         />
+        <link
+          rel="canonical"
+          href="https://cinepulse-xi.vercel.app/movies-to-watch-tonight"
+        />
+
+        <meta
+          property="og:title"
+          content="Movies to Watch Tonight | CinePulse"
+        />
+
+        <meta
+          property="og:description"
+          content="Find recommendation of movies worth watching tonight with CinePulse."
+        />
+
+        <meta property="og:type" content="website" />
+
+        <meta
+          property="og:url"
+          content="https://cinepulse-xi.vercel.app/movies-to-watch-tonight"
+        />
+
+        <meta
+          property="og:image"
+          content="https://cinepulse-xi.vercel.app/cinepulse_logo.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div className="seoPage">

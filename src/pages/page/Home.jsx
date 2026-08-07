@@ -57,6 +57,25 @@ const Home = ({ handleWatchTrailer }) => {
           name="description"
           content="Find trending movies, explore ratings, and discover what to watch next with CinePulse."
         />
+        <link rel="canonical" href="https://cinepulse-xi.vercel.app/" />
+
+        <meta property="og:title" content="CinePulse - Discover Movies" />
+
+        <meta
+          property="og:description"
+          content="Discover trending movies, popular films, ratings, and recommendations with CinePulse."
+        />
+
+        <meta property="og:type" content="website" />
+
+        <meta property="og:url" content="https://cinepulse-xi.vercel.app/" />
+
+        <meta
+          property="og:image"
+          content="https://cinepulse-xi.vercel.app/cinepulse_logo.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div className={styles.pageContainer}>

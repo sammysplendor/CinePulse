@@ -47,11 +47,33 @@ const Trending = ({ handleWatchTrailer }) => {
   return (
     <>
       <Helmet>
-        <title>CinePulse - Trending Movies</title>
+        <title>Trending Movies | CinePulse</title>
         <meta
           name="description"
           content="Discover the latest trending movies and popular films people are watching right now with CinePulse."
         />
+        <link rel="canonical" href="https://cinepulse-xi.vercel.app/Trending" />
+
+        <meta property="og:title" content="Trending Movies | CinePulse" />
+
+        <meta
+          property="og:description"
+          content="Discover the latest trending movies and popular films people are watching right now with CinePulse."
+        />
+
+        <meta property="og:type" content="website" />
+
+        <meta
+          property="og:url"
+          content="https://cinepulse-xi.vercel.app/Trending"
+        />
+
+        <meta
+          property="og:image"
+          content="https://cinepulse-xi.vercel.app/cinepulse_logo.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div className={styles.pageContainer}>

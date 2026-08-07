@@ -13,12 +13,11 @@ import {
 import Navbar from "../../components/Navbar";
 import MovieCard_2 from "../../components/MovieCard_2";
 import useWatchlist from "../../hooks/useWatchlist";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const Explore = ({ handleWatchTrailer }) => {
-  let navigate = useNavigate();
-
   const { addToWatchlist } = useWatchlist();
 
   const [content, setContent] = useState([]);
@@ -208,9 +207,9 @@ const Explore = ({ handleWatchTrailer }) => {
             </p>
           </div>
 
-          <button onClick={() => navigate("/Trending")}>
+          <Link className={styles.heroButton} to="/Trending">
             See Trending Movies
-          </button>
+          </Link>
         </section>
 
         {/* =============== CATEGORY SECTION =============== */}

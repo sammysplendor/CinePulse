@@ -60,7 +60,7 @@
   text-align: center;
 }
 
-.heroContent button {
+.heroButton {
   padding: 1rem 2rem;
   background: var(--color-primary);
   color: var(--text-on-brand);

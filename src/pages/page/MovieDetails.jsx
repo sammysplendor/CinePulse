@@ -42,6 +42,28 @@ const MovieDetails = () => {
     movie.overview ||
     `Discover ${movie.title} on CinePulse. Explore movie details, ratings, release information, and more.`;
 
+  const movieSchema = {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    name: movie.title,
+    description: description,
+    url: `https://cinepulse-xi.vercel.app/movie/${movie.id}`,
+    image: movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : undefined,
+    dateCreated: movie.release_date || undefined,
+    genre: movie.genres?.map((genre) => genre.name),
+    aggregateRating: movie.vote_count
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: movie.vote_average,
+          ratingCount: movie.vote_count,
+          bestRating: 10,
+          worstRating: 0,
+        }
+      : undefined,
+  };
+
   return (
     <>
       <Helmet>
@@ -73,6 +95,10 @@ const MovieDetails = () => {
         )}
 
         <meta name="twitter:card" content="summary_large_image" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(movieSchema)}
+        </script>
       </Helmet>
 
       <main>

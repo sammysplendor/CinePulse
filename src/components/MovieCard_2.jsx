@@ -3,6 +3,7 @@ import { IMAGE_BASE_URL, IMAGE_SIZES } from "../constants/config";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const MovieCard_2 = ({
   movie,
@@ -19,29 +20,36 @@ const MovieCard_2 = ({
 
   return (
     <div className={styles.cardContainer}>
-      <img
-        src={
-          movie.poster_path
-            ? `${IMAGE_BASE_URL}${IMAGE_SIZES.poster_sm}${movie.poster_path}`
-            : "/no-image.png"
-        }
-        alt={title}
-        className={styles.poster}
-      />
+      <Link to={`/movie/${movie.id}`} title="See full detail">
+        <img
+          src={
+            movie.poster_path
+              ? `${IMAGE_BASE_URL}${IMAGE_SIZES.poster_sm}${movie.poster_path}`
+              : "/no-image.png"
+          }
+          alt={title}
+          className={styles.poster}
+        />
+      </Link>
 
-      <p className={styles.movieTitle}>
-        <b>{title}</b>
-      </p>
+      <Link to={`/movie/${movie.id}`} title="See full detail">
+        <p className={styles.movieTitle}>
+          <b>{title}</b>
+        </p>
+      </Link>
 
       <div className={styles.year}>
         <p>{releaseYear ?? "Unknown"}</p>{" "}
-        <ArrowRight
-          className={styles.openModal}
-          onClick={() => {
-            setSelectedMovie(movie);
-            setOpenModal(true);
-          }}
-        />
+        <span>
+          <p>Preview</p>
+          <ArrowRight
+            className={styles.openModal}
+            onClick={() => {
+              setSelectedMovie(movie);
+              setOpenModal(true);
+            }}
+          />
+        </span>
       </div>
 
       {openModal && selectedMovie && (

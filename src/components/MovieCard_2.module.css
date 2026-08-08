@@ -21,11 +21,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .openModal {
   color: var(--color-primary);
-  width: 5rem;
+  width: 3rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }

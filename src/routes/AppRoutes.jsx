@@ -5,6 +5,7 @@ import Trending from "../pages/page/Trending";
 import MoviesTonight from "../pages/page/MoviesTonight";
 import useWatchTrailer from "../hooks/useWatchTrailer";
 import TrailerModal from "../components/TrailerModal";
+import MovieDetails from "../pages/page/MovieDetails";
 
 const AppRoutes = () => {
   const { trailerURL, setTrailerURL, handleWatchTrailer } = useWatchTrailer();
@@ -24,6 +25,7 @@ const AppRoutes = () => {
           element={<Trending handleWatchTrailer={handleWatchTrailer} />}
         />
         <Route path="/movies-to-watch-tonight" element={<MoviesTonight />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
 
       <TrailerModal trailerURL={trailerURL} onClose={() => setTrailerURL("")} />

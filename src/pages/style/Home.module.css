@@ -59,6 +59,16 @@ small {
   border-radius: var(--br-md);
 }
 
+.heroLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    color: var(--text-secondary);
+  }
+}
+
 .leftContent {
   display: flex;
   flex-direction: column;

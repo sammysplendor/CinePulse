@@ -13,24 +13,31 @@ const Home = ({ handleWatchTrailer }) => {
   const [topTrending, setTopTrending] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const trendingMovies = await getTopTrending("day");
-      const topRatedMovies = await getTopRated();
+      setLoading(true);
 
-      const updated = trendingMovies.map((item) => ({
-        ...item,
-        media_type: item.first_air_date ? "tv" : "movie",
-      }));
+      try {
+        const trendingMovies = await getTopTrending("day");
+        const topRatedMovies = await getTopRated();
 
-      setTopTrending(updated);
-      setTopRated(topRatedMovies);
+        const updated = trendingMovies.map((item) => ({
+          ...item,
+          media_type: item.first_air_date ? "tv" : "movie",
+        }));
 
-      // Pick a random movie for the spotlight
-      if (trendingMovies?.length > 0) {
-        const randomIndex = Math.floor(Math.random() * trendingMovies.length);
-        setCurrentIndex(randomIndex);
+        setTopTrending(updated);
+        setTopRated(topRatedMovies);
+
+        // Pick a random movie for the spotlight
+        if (trendingMovies?.length > 0) {
+          const randomIndex = Math.floor(Math.random() * trendingMovies.length);
+          setCurrentIndex(randomIndex);
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -103,45 +110,56 @@ const Home = ({ handleWatchTrailer }) => {
                 backgroundRepeat: "no-repeat",
               }}
             >
-              <div className={styles.leftContent}>
-                <h3>Top Trending Spotlight</h3>
+              {loading ? (
+                <div className={styles.heroLoading}>
+                  <h3>Loading trending movies...</h3>
+                </div>
+              ) : (
+                <div className={styles.leftContent}>
+                  <h3>Top Trending Spotlight</h3>
 
-                <div className={styles.slider}>
-                  <button className={styles.sliderBtnLeft} onClick={handlePrev}>
-                    <ChevronLeft />
-                  </button>
+                  <div className={styles.slider}>
+                    <button
+                      className={styles.sliderBtnLeft}
+                      onClick={handlePrev}
+                    >
+                      <ChevronLeft />
+                    </button>
 
-                  <button
-                    className={styles.sliderBtnRight}
-                    onClick={handleNext}
-                  >
-                    <ChevronRight />
-                  </button>
+                    <button
+                      className={styles.sliderBtnRight}
+                      onClick={handleNext}
+                    >
+                      <ChevronRight />
+                    </button>
 
-                  {/* ----- SLIDER TRACK ----- */}
-                  <div
-                    className={styles.sliderTrack}
-                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                  >
-                    {topTrending.map((movie) => (
-                      <div className={styles.slide} key={movie.id}>
-                        <div className={styles.movieDetail}>
-                          <h1>{movie.title}</h1>
-                          <p>{movie.overview}</p>
+                    {/* ----- SLIDER TRACK ----- */}
+                    <div
+                      className={styles.sliderTrack}
+                      style={{
+                        transform: `translateX(-${currentIndex * 100}%)`,
+                      }}
+                    >
+                      {topTrending.map((movie) => (
+                        <div className={styles.slide} key={movie.id}>
+                          <div className={styles.movieDetail}>
+                            <h1>{movie.title}</h1>
+                            <p>{movie.overview}</p>
 
-                          <button
-                            className={styles.trailerBtn}
-                            onClick={() => handleWatchTrailer(movie)}
-                          >
-                            <Play fill="#fff" className={styles.playIcon} />{" "}
-                            Watch Trailer
-                          </button>
+                            <button
+                              className={styles.trailerBtn}
+                              onClick={() => handleWatchTrailer(movie)}
+                            >
+                              <Play fill="#fff" className={styles.playIcon} />{" "}
+                              Watch Trailer
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </section>
 
             <section className={styles.trendingSection}>

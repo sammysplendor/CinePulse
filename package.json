@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run generate:sitemap && vite build",
-    "generate:sitemap": "node --env-file=.env scripts/generate-sitemap.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.13.6",
     "boxicons": "^2.1.4",
+    "dotenv": "^17.4.2",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

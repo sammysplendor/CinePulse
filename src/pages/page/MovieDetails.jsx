@@ -1,7 +1,9 @@
+import styles from "../style/MovieDetails.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../services/movieApi";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -21,10 +23,6 @@ const MovieDetails = () => {
 
     fetchMovie();
   }, [id]);
-
-  if (loading) {
-    return <p>Loading movie...</p>;
-  }
 
   if (!movie) {
     return <p>Movie not found.</p>;
@@ -51,17 +49,8 @@ const MovieDetails = () => {
     image: movie.poster_path
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
       : undefined,
-    dateCreated: movie.release_date || undefined,
+    datePublished: movie.release_date || undefined,
     genre: movie.genres?.map((genre) => genre.name),
-    aggregateRating: movie.vote_count
-      ? {
-          "@type": "AggregateRating",
-          ratingValue: movie.vote_average,
-          ratingCount: movie.vote_count,
-          bestRating: 10,
-          worstRating: 0,
-        }
-      : undefined,
   };
 
   return (
@@ -101,21 +90,56 @@ const MovieDetails = () => {
         </script>
       </Helmet>
 
-      <main>
-        <h1>{movie.title}</h1>
+      <main className={styles.page}>
+        {loading ? (
+          <div className={styles.pageLoading}>
+            <h1>Loading Movie Details...</h1>
+          </div>
+        ) : (
+          <div className={styles.container}>
+            <Link to="/Explore" className={styles.backLink}>
+              ← Back to Explore
+            </Link>
 
-        {movie.backdrop_path && (
-          <img
-            src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
-            alt={movie.title}
-          />
+            <article className={styles.hero}>
+              {movie.poster_path && (
+                <img
+                  className={styles.poster}
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={`${movie.title} movie poster`}
+                  loading="eager"
+                />
+              )}
+
+              <div className={styles.content}>
+                <h1 className={styles.title}>{movie.title}</h1>
+
+                <div className={styles.meta}>
+                  <p>{movie.release_date || "Release date unknown"}</p>
+
+                  <p>⭐ {movie.vote_average?.toFixed(1) || "N/A"}</p>
+
+                  {movie.runtime && <p>{movie.runtime} min</p>}
+                </div>
+
+                <p className={styles.overview}>
+                  {movie.overview ||
+                    `Discover ${movie.title} on CinePulse. Explore movie details, ratings, release information, and more.`}
+                </p>
+
+                {movie.genres?.length > 0 && (
+                  <div className={styles.genres}>
+                    {movie.genres.map((genre) => (
+                      <p key={genre.id} className={styles.genre}>
+                        {genre.name}
+                      </p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          </div>
         )}
-
-        <p>{movie.overview}</p>
-
-        <p>Release date: {movie.release_date || "Unknown"}</p>
-
-        <p>Rating: {movie.vote_average?.toFixed(1) || "N/A"}</p>
       </main>
     </>
   );

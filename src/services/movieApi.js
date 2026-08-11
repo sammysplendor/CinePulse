@@ -83,6 +83,23 @@ export const getMovieDetails = async (id) => {
   }
 };
 
+// =============== Fetch Recommendations =============== //
+
+export const getMovieRecommendations = async (id) => {
+  try {
+    const response = await api.get(`movie/${id}/recommendations`);
+
+    return response.data.results || [];
+  } catch (error) {
+    console.error(
+      "Error fetching movie recommendations:",
+      error.response?.data || error.message,
+    );
+
+    return [];
+  }
+};
+
 // =============== Fetch TV series =============== //
 
 export const getTV_popular = async () => {

@@ -50,13 +50,25 @@ small {
   background: var(--surface-low);
 }
 
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--br-md);
+  z-index: 0;
+}
+
 .heroSection::before {
   position: absolute;
   content: "";
   inset: 0;
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.64);
   border-radius: var(--br-md);
+  z-index: 1;
 }
 
 .heroLoading {
@@ -136,10 +148,6 @@ small {
   padding-inline: 2rem;
   min-width: 100%;
 }
-
-/* .movieDetail h1{
-    text-wrap: wrap;
-} */
 
 .trailerBtn {
   display: flex;

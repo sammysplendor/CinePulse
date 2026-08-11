@@ -1,17 +1,62 @@
 import "../style/MoviesTonight.css";
 import Navbar from "../../components/Navbar";
+import MovieCard from "../../components/MovieCard";
 import { Helmet } from "react-helmet";
-import { Flame, Clapperboard, Lightbulb } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  getTopTrending,
+  getPopularMovies,
+  getTopRated,
+} from "../../services/movieApi";
+import useWatchlist from "../../hooks/useWatchlist";
 
 const MoviesTonight = () => {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const { addToWatchlist } = useWatchlist();
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      setLoading(true);
+
+      try {
+        const [trending, popular, topRated] = await Promise.all([
+          getTopTrending("week"),
+          getPopularMovies(),
+          getTopRated(),
+        ]);
+
+        // Combine all three sources
+        const combined = [...trending, ...popular, ...topRated];
+
+        // Remove duplicate movies
+        const uniqueMovies = [
+          ...new Map(combined.map((movie) => [movie.id, movie])).values(),
+        ];
+
+        // Keep the page focused instead of displaying hundreds of movies
+        setMovies(uniqueMovies.slice(0, 15));
+      } catch (error) {
+        console.error("Error fetching Movies Tonight:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
     <>
       <Helmet>
         <title>Movies to Watch Tonight | CinePulse</title>
+
         <meta
           name="description"
-          content="Find movies worth watching tonight with CinePulse. Explore recommendations and discover your next movie night pick."
+          content="Discover movies worth watching tonight with CinePulse. Explore trending, popular, and top-rated movies."
         />
+
         <link
           rel="canonical"
           href="https://cinepulse-xi.vercel.app/movies-to-watch-tonight"
@@ -24,7 +69,7 @@ const MoviesTonight = () => {
 
         <meta
           property="og:description"
-          content="Find recommendation of movies worth watching tonight with CinePulse."
+          content="Discover trending, popular, and top-rated movies worth watching tonight with CinePulse."
         />
 
         <meta property="og:type" content="website" />
@@ -34,11 +79,6 @@ const MoviesTonight = () => {
           content="https://cinepulse-xi.vercel.app/movies-to-watch-tonight"
         />
 
-        <meta
-          property="og:image"
-          content="https://cinepulse-xi.vercel.app/cinepulse_logo.png"
-        />
-
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
@@ -46,83 +86,37 @@ const MoviesTonight = () => {
         <Navbar />
 
         <div className="pageContent">
-          <h1>Movies to Watch Tonight (2025-2026)</h1>
+          <h1>Movies to Watch Tonight</h1>
 
           <p className="pageDescription">
-            Looking for the best movies to watch tonight? Here are some of the
-            most recent and trending films from 2025 and 2026 - carefully
-            selected across different genres to match your mood.
+            Looking for something great to watch tonight? Discover a selection
+            of trending, popular, and top-rated movies currently worth adding to
+            your watchlist.
           </p>
 
-          <section className="cards">
-            <div className="card">
-              <span className="iconContainer">
-                <Flame fill="#00ffe1" className="cardIcon" />
-              </span>
+          <section className="movieRecommendations">
+            <h2>Tonight's Movie Picks</h2>
 
-              <h2>Top Picks Right Now</h2>
-
-              <ul>
-                <li>
-                  • <strong>Sinners (2025)</strong> - A powerful and emotionally
-                  intense drama that blends historical themes with suspense and
-                  standout performances.
-                </li>
-                <li>
-                  • <strong>Avatar: Fire and Ash (2025)</strong> - A visually
-                  stunning sci-fi epic that expands the Avatar universe with new
-                  conflicts and breathtaking worlds.
-                </li>
-                <li>
-                  • <strong>The Odyssey (2026)</strong> - A grand cinematic
-                  adaptation of the classic myth, combining action, adventure,
-                  and storytelling on a massive scale.
-                </li>
-                <li>
-                  • <strong>28 Years Later: The Bone Temple (2026)</strong> - A
-                  dark and gripping post-apocalyptic thriller exploring survival
-                  in a world still recovering from a deadly outbreak.
-                </li>
-                <li>
-                  • <strong>War Machine (2026)</strong> - A high-intensity
-                  modern action thriller centered around advanced warfare,
-                  strategy, and global conflict, blending military tension with
-                  fast-paced storytelling.
-                </li>
-              </ul>
-            </div>
-
-            <div className="card">
-              <span className="iconContainer">
-                <Clapperboard fill="#00ffe1" className="cardIcon" />
-              </span>
-
-              <h2>Why these movies?</h2>
-
+            {loading ? (
+              <p>Finding movies for you...</p>
+            ) : movies.length > 0 ? (
+              <div className="movieGrid">
+                {movies.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onAddToWatchlist={() => {
+                      addToWatchlist;
+                    }}
+                  />
+                ))}
+              </div>
+            ) : (
               <p>
-                These films are selected based on recent popularity, audience
-                interest, and critical attention. Whether you enjoy action,
-                drama, or thrillers, this list offers some of the best modern
-                options available right now.
+                We couldn't load movie recommendations right now. Please try
+                again later.
               </p>
-            </div>
-
-            <div className="card">
-              <span className="iconContainer">
-                <Lightbulb fill="#00ffe1" className="cardIcon" />
-              </span>
-
-              <h2>More Recommendations</h2>
-
-              <p>
-                Visit the{" "}
-                <a href="/explore">
-                  <u>Explore Page</u>
-                </a>{" "}
-                to discover more movies by genre, title, popularity, and find
-                the perfect film for your mood.
-              </p>
-            </div>
+            )}
           </section>
         </div>
       </div>

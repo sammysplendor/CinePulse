@@ -98,18 +98,16 @@ const Home = ({ handleWatchTrailer }) => {
 
         <div className={styles.mainContent}>
           <main>
-            <section
-              className={styles.heroSection}
-              style={{
-                backgroundImage: topTrending[currentIndex]
-                  ? `url(${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${topTrending[currentIndex].backdrop_path})`
-                  : "/no-image.png",
+            <section className={styles.heroSection}>
+              {topTrending[currentIndex]?.backdrop_path && (
+                <img
+                  className={styles.heroBackdrop}
+                  src={`${IMAGE_BASE_URL}${IMAGE_SIZES.backdrop}${topTrending[currentIndex].backdrop_path}`}
+                  alt=""
+                  fetchPriority="high"
+                />
+              )}
 
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
               {loading ? (
                 <div className={styles.heroLoading}>
                   <h3>Loading trending movies...</h3>

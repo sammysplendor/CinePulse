@@ -1,9 +1,9 @@
 import styles from "../style/MovieDetails.module.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../services/movieApi";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -24,8 +24,29 @@ const MovieDetails = () => {
     fetchMovie();
   }, [id]);
 
+  if (loading) {
+    return (
+      <main className={styles.page}>
+        <div className={styles.pageLoading}>
+          <h1>Loading Movie Details...</h1>
+        </div>
+      </main>
+    );
+  }
+
   if (!movie) {
-    return <p>Movie not found.</p>;
+    return (
+      <main className={styles.page}>
+        <div className={styles.pageLoading}>
+          <h1>Movie not found.</h1>
+          <Link to="/Explore" className={styles.backLink}>
+            <span>
+              <ArrowLeft size={20} /> Back to Explore
+            </span>
+          </Link>
+        </div>
+      </main>
+    );
   }
 
   const releaseYear = movie.release_date
@@ -91,55 +112,51 @@ const MovieDetails = () => {
       </Helmet>
 
       <main className={styles.page}>
-        {loading ? (
-          <div className={styles.pageLoading}>
-            <h1>Loading Movie Details...</h1>
-          </div>
-        ) : (
-          <div className={styles.container}>
-            <Link to="/Explore" className={styles.backLink}>
-              ← Back to Explore
-            </Link>
+        <div className={styles.container}>
+          <Link to="/Explore" className={styles.backLink}>
+            <span>
+              <ArrowLeft size={20} /> Back to Explore
+            </span>
+          </Link>
 
-            <article className={styles.hero}>
-              {movie.poster_path && (
-                <img
-                  className={styles.poster}
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={`${movie.title} movie poster`}
-                  loading="eager"
-                />
-              )}
+          <article className={styles.hero}>
+            {movie.poster_path && (
+              <img
+                className={styles.poster}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={`${movie.title} movie poster`}
+                loading="eager"
+              />
+            )}
 
-              <div className={styles.content}>
-                <h1 className={styles.title}>{movie.title}</h1>
+            <div className={styles.content}>
+              <h1 className={styles.title}>{movie.title}</h1>
 
-                <div className={styles.meta}>
-                  <p>{movie.release_date || "Release date unknown"}</p>
+              <div className={styles.meta}>
+                <p>{movie.release_date || "Release date unknown"}</p>
 
-                  <p>⭐ {movie.vote_average?.toFixed(1) || "N/A"}</p>
+                <p>⭐ {movie.vote_average?.toFixed(1) || "N/A"}</p>
 
-                  {movie.runtime && <p>{movie.runtime} min</p>}
-                </div>
-
-                <p className={styles.overview}>
-                  {movie.overview ||
-                    `Discover ${movie.title} on CinePulse. Explore movie details, ratings, release information, and more.`}
-                </p>
-
-                {movie.genres?.length > 0 && (
-                  <div className={styles.genres}>
-                    {movie.genres.map((genre) => (
-                      <p key={genre.id} className={styles.genre}>
-                        {genre.name}
-                      </p>
-                    ))}
-                  </div>
-                )}
+                {movie.runtime && <p>{movie.runtime} min</p>}
               </div>
-            </article>
-          </div>
-        )}
+
+              <p className={styles.overview}>
+                {movie.overview ||
+                  `Discover ${movie.title} on CinePulse. Explore movie details, ratings, release information, and more.`}
+              </p>
+
+              {movie.genres?.length > 0 && (
+                <div className={styles.genres}>
+                  {movie.genres.map((genre) => (
+                    <p key={genre.id} className={styles.genre}>
+                      {genre.name}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </article>
+        </div>
       </main>
     </>
   );

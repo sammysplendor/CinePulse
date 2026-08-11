@@ -15,39 +15,21 @@
   text-align: center;
 }
 
-.cards {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-top: 4rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  background: var(--surface-low);
-  border: 0.5px solid var(--color-accent);
-  border-radius: var(--br-md);
-  padding: 2rem;
-}
-
 a {
   color: var(--color-primary);
 }
 
-.iconContainer {
-  padding: 1.5rem;
-  border-radius: 50%;
-  background: var(--surface-medium);
-  width: fit-content;
+.movieRecommendations {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.cardIcon {
-  width: 3rem;
-  height: 3rem;
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 /* =============== RESPONSIVENESS =============== */
@@ -59,6 +41,10 @@ a {
   .seoPage {
     padding-inline: 3rem;
   }
+
+  .movieGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ===== ≤ 576px (Small Phones) ===== */
@@ -67,5 +53,11 @@ a {
 
   .seoPage {
     padding-inline: 2.5rem;
+  }
+
+  .movieGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 }

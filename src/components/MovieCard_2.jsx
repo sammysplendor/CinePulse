@@ -20,7 +20,7 @@ const MovieCard_2 = ({
 
   return (
     <div className={styles.cardContainer}>
-      <Link to={`/movie/${movie.id}`} title="See full detail">
+      <Link to={`/movie/${movie.id}`} title={`See details for ${title}`}>
         <img
           src={
             movie.poster_path
@@ -32,7 +32,7 @@ const MovieCard_2 = ({
         />
       </Link>
 
-      <Link to={`/movie/${movie.id}`} title="See full detail">
+      <Link to={`/movie/${movie.id}`} title={`See details for ${title}`}>
         <p className={styles.movieTitle}>
           <b>{title}</b>
         </p>

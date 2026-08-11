@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
   h1 {
     color: var(--text-secondary);
@@ -24,6 +25,13 @@
   margin-bottom: 30px;
   color: var(--text-primary);
   font-size: 1.5rem;
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .hero {

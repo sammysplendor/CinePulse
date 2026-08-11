@@ -20,8 +20,8 @@ const Home = ({ handleWatchTrailer }) => {
       setLoading(true);
 
       try {
+        // Fetch trending first because the hero depends on it
         const trendingMovies = await getTopTrending("day");
-        const topRatedMovies = await getTopRated();
 
         const updated = trendingMovies.map((item) => ({
           ...item,
@@ -29,13 +29,18 @@ const Home = ({ handleWatchTrailer }) => {
         }));
 
         setTopTrending(updated);
-        setTopRated(topRatedMovies);
 
         // Pick a random movie for the spotlight
         if (trendingMovies?.length > 0) {
           const randomIndex = Math.floor(Math.random() * trendingMovies.length);
           setCurrentIndex(randomIndex);
         }
+
+        // The hero doesn't need top-rated movies. Fetch separately.
+        const topRatedMovies = await getTopRated();
+        setTopRated(topRatedMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
       } finally {
         setLoading(false);
       }

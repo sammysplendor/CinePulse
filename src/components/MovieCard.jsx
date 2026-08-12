@@ -26,7 +26,12 @@ const MovieCard = ({ movie, onAddToWatchlist, priority = false }) => {
       </Link>
       <p>{new Date(movie.release_date).getFullYear()}</p>
 
-      <button onClick={() => onAddToWatchlist(movie)}>
+      <button
+        type="button"
+        onClick={() => {
+          onAddToWatchlist?.(movie);
+        }}
+      >
         Watchlist <ArrowRight />
       </button>
     </div>

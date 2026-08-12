@@ -220,15 +220,14 @@ const Home = ({ handleWatchTrailer }) => {
               </h3>
 
               <div className={styles.watchlist}>
-                {openWatchlist &&
-                  watchlist?.map((movie) => (
-                    <WatchlistCard
-                      key={movie.id}
-                      movie={movie}
-                      onRemove={removeFromWatchlist}
-                      handleWatchTrailer={handleWatchTrailer}
-                    />
-                  ))}
+                {watchlist?.map((movie) => (
+                  <WatchlistCard
+                    key={movie.id}
+                    movie={movie}
+                    onRemove={removeFromWatchlist}
+                    handleWatchTrailer={handleWatchTrailer}
+                  />
+                ))}
               </div>
             </section>
           </aside>

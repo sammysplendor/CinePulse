@@ -3,7 +3,7 @@ import { IMAGE_BASE_URL, IMAGE_SIZES } from "../constants/config";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const MovieCard = ({ movie, onAddToWatchlist }) => {
+const MovieCard = ({ movie, onAddToWatchlist, priority = false }) => {
   if (!movie?.poster_path) return null;
 
   const title = movie.title ?? movie?.name ?? "Untitled";
@@ -15,6 +15,8 @@ const MovieCard = ({ movie, onAddToWatchlist }) => {
           src={`${IMAGE_BASE_URL}${IMAGE_SIZES.poster_sm}${movie.poster_path}`}
           alt={movie.title}
           className={styles.poster}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
         />
       </Link>
       <Link to={`/movie/${movie.id}`} title={`See details for ${title}`}>

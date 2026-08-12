@@ -16,12 +16,12 @@ const Home = ({ handleWatchTrailer }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovie = async () => {
+    const fetchTrending = async () => {
       setLoading(true);
 
       try {
-        // Fetch trending first because the hero depends on it
         const trendingMovies = await getTopTrending("day");
+        // const topRatedMovies = await getTopRated();
 
         const updated = trendingMovies.map((item) => ({
           ...item,
@@ -29,16 +29,13 @@ const Home = ({ handleWatchTrailer }) => {
         }));
 
         setTopTrending(updated);
+        // setTopRated(topRatedMovies);
 
         // Pick a random movie for the spotlight
         if (trendingMovies?.length > 0) {
           const randomIndex = Math.floor(Math.random() * trendingMovies.length);
           setCurrentIndex(randomIndex);
         }
-
-        // The hero doesn't need top-rated movies. Fetch separately.
-        const topRatedMovies = await getTopRated();
-        setTopRated(topRatedMovies);
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
@@ -46,7 +43,17 @@ const Home = ({ handleWatchTrailer }) => {
       }
     };
 
-    fetchMovie();
+    const fetchTopRated = async () => {
+      try {
+        const topRatedMovies = await getTopRated();
+        setTopRated(topRatedMovies);
+      } catch (error) {
+        console.error("Error fetching top-rated movies:", error);
+      }
+    };
+
+    fetchTrending();
+    fetchTopRated();
   }, []);
 
   const handlePrev = () => {
@@ -169,11 +176,12 @@ const Home = ({ handleWatchTrailer }) => {
               <h3>Trending Now in Real Time</h3>
 
               <div className={styles.cardGrid}>
-                {topTrending.map((movie) => (
+                {topTrending.slice(0, 8).map((movie, index) => (
                   <MovieCard
                     key={movie.id}
                     movie={movie}
                     onAddToWatchlist={addToWatchlist}
+                    priority={index === 0}
                   />
                 ))}
               </div>
@@ -183,7 +191,7 @@ const Home = ({ handleWatchTrailer }) => {
               <h3>Top Rated Movies</h3>
 
               <div className={styles.cardGrid}>
-                {topRated.map((movie) => (
+                {topRated.slice(0, 8).map((movie) => (
                   <MovieCard
                     key={movie.id}
                     movie={movie}
@@ -212,14 +220,15 @@ const Home = ({ handleWatchTrailer }) => {
               </h3>
 
               <div className={styles.watchlist}>
-                {watchlist?.map((movie) => (
-                  <WatchlistCard
-                    key={movie.id}
-                    movie={movie}
-                    onRemove={removeFromWatchlist}
-                    handleWatchTrailer={handleWatchTrailer}
-                  />
-                ))}
+                {openWatchlist &&
+                  watchlist?.map((movie) => (
+                    <WatchlistCard
+                      key={movie.id}
+                      movie={movie}
+                      onRemove={removeFromWatchlist}
+                      handleWatchTrailer={handleWatchTrailer}
+                    />
+                  ))}
               </div>
             </section>
           </aside>

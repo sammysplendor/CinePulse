@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 const useWatchlist = () => {
   const [watchlist, setWatchlist] = useState(() => {
@@ -19,12 +20,16 @@ const useWatchlist = () => {
   }, [watchlist]);
 
   const addToWatchlist = (movie) => {
-    setWatchlist((prev) => {
-      const exists = prev.some((item) => item.id === movie.id);
-      if (exists) return prev;
+    const exists = watchlist.some((item) => item.id === movie.id);
 
-      return [...prev, movie];
-    });
+    if (exists) {
+      toast.info("This movie is already in your watchlist.");
+      return;
+    }
+
+    setWatchlist((prev) => [...prev, movie]);
+
+    toast.success("Movie has been added to your watchlist.");
   };
 
   const removeFromWatchlist = (id) => {
